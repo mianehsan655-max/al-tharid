@@ -11,20 +11,26 @@ export default function ProductCard({ item }: { item: Item }) {
   const [added, setAdded] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
+
   const dialogRef = useRef<HTMLDialogElement>(null);
   const galleryTitleId = useId();
   const { addItem } = useCart();
+
   const photos = getProductPhotos(item);
   const photo = photos[photoIndex] ?? photos[0];
   const canAdd = item.available && item.price !== null;
 
   useEffect(() => {
     if (!galleryOpen) return;
+
     const dialog = dialogRef.current;
     if (!dialog) return;
+
     const previousOverflow = document.body.style.overflow;
+
     dialog.showModal();
     document.body.style.overflow = "hidden";
+
     return () => {
       dialog.close();
       document.body.style.overflow = previousOverflow;
@@ -32,7 +38,9 @@ export default function ProductCard({ item }: { item: Item }) {
   }, [galleryOpen]);
 
   const movePhoto = (direction: number) => {
-    setPhotoIndex((current) => (current + direction + photos.length) % photos.length);
+    setPhotoIndex(
+      (current) => (current + direction + photos.length) % photos.length
+    );
   };
 
   return (
@@ -49,40 +57,44 @@ export default function ProductCard({ item }: { item: Item }) {
             src={photo.src}
             alt={`Preview photo ${photoIndex + 1} for ${item.name}`}
             fill
-            sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 33vw"
+            sizes="(max-width: 1020px) 50vw, 33vw"
           />
         </button>
+
         <span className="menu-card__tag">PREVIEW PHOTO</span>
-        <span className="menu-card__view">View photos · {photos.length}</span>
+
+        <span className="menu-card__view">
+          View photos · {photos.length}
+        </span>
+
         <strong className="menu-card__price">
-          {item.price === null ? "TBC" : <><small>PKR</small> {item.price.toLocaleString("en-PK")}</>}
+          {item.price === null ? (
+            "TBC"
+          ) : (
+            <>
+              <small>PKR</small> {item.price.toLocaleString("en-PK")}
+            </>
+          )}
         </strong>
       </div>
-      {photos.length > 1 && (
-        <div className="menu-card__thumbnails" role="group" aria-label={`${item.name} photos`}>
-          {photos.map((entry, index) => (
-            <button
-              key={`${entry.src}-${index}`}
-              type="button"
-              className={`menu-card__thumbnail${photoIndex === index ? " is-selected" : ""}`}
-              aria-label={`Show ${item.name} photo ${index + 1}`}
-              aria-pressed={photoIndex === index}
-              onClick={() => setPhotoIndex(index)}
-            >
-              <Image unoptimized src={entry.src} alt="" fill sizes="56px" />
-            </button>
-          ))}
-        </div>
-      )}
+
       <div className="menu-card__body">
-        <span className="menu-card__category">{item.category === "Burger" ? "Burgers" : item.category}</span>
+        <span className="menu-card__category">
+          {item.category === "Burger" ? "Burgers" : item.category}
+        </span>
+
         <h3>{item.name}</h3>
         <p>{item.description}</p>
+
         {canAdd ? (
           <div className="menu-card__order">
             <div className="menu-card__quantity">
               <span>Quantity</span>
-              <div className="quantity-control" aria-label={`Quantity for ${item.name}`}>
+
+              <div
+                className="quantity-control"
+                aria-label={`Quantity for ${item.name}`}
+              >
                 <button
                   type="button"
                   aria-label={`Decrease ${item.name} quantity`}
@@ -91,7 +103,9 @@ export default function ProductCard({ item }: { item: Item }) {
                 >
                   −
                 </button>
+
                 <output aria-live="polite">{quantity}</output>
+
                 <button
                   type="button"
                   aria-label={`Increase ${item.name} quantity`}
@@ -102,6 +116,7 @@ export default function ProductCard({ item }: { item: Item }) {
                 </button>
               </div>
             </div>
+
             <button
               className="menu-card__add"
               type="button"
@@ -112,8 +127,19 @@ export default function ProductCard({ item }: { item: Item }) {
               }}
             >
               <span>{added ? "Added ✓" : "Add to cart"}</span>
+
               {!added && (
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  aria-hidden="true"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M6 7h12l1 13H5L6 7Z" />
                   <path d="M9 8V6a3 3 0 0 1 6 0v2" />
                 </svg>
@@ -121,22 +147,28 @@ export default function ProductCard({ item }: { item: Item }) {
             </button>
           </div>
         ) : (
-          <span className="menu-card__unavailable">Currently unavailable</span>
+          <span className="menu-card__unavailable">
+            Currently unavailable
+          </span>
         )}
       </div>
+
       <dialog
         ref={dialogRef}
         className="product-gallery"
         aria-labelledby={galleryTitleId}
         onClose={() => setGalleryOpen(false)}
         onClick={(event) => {
-          if (event.target === event.currentTarget) setGalleryOpen(false);
+          if (event.target === event.currentTarget) {
+            setGalleryOpen(false);
+          }
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft") {
             event.preventDefault();
             movePhoto(-1);
           }
+
           if (event.key === "ArrowRight") {
             event.preventDefault();
             movePhoto(1);
@@ -149,30 +181,76 @@ export default function ProductCard({ item }: { item: Item }) {
               <span>PRODUCT PHOTOS</span>
               <h2 id={galleryTitleId}>{item.name}</h2>
             </div>
-            <button className="product-gallery__close" type="button" aria-label="Close image gallery" onClick={() => setGalleryOpen(false)}>×</button>
+
+            <button
+              className="product-gallery__close"
+              type="button"
+              aria-label="Close image gallery"
+              onClick={() => setGalleryOpen(false)}
+            >
+              ×
+            </button>
           </div>
+
           <div className="product-gallery__image">
-            <Image unoptimized src={photo.src} alt={`Preview photo ${photoIndex + 1} for ${item.name}`} fill sizes="(max-width: 900px) 95vw, 850px" />
+            <Image
+              unoptimized
+              src={photo.src}
+              alt={`Preview photo ${photoIndex + 1} for ${item.name}`}
+              fill
+              sizes="(max-width: 900px) 95vw, 850px"
+            />
+
             {photos.length > 1 && (
               <>
-                <button className="product-gallery__previous" type="button" aria-label="Previous photo" onClick={() => movePhoto(-1)}>‹</button>
-                <button className="product-gallery__next" type="button" aria-label="Next photo" onClick={() => movePhoto(1)}>›</button>
+                <button
+                  className="product-gallery__previous"
+                  type="button"
+                  aria-label="Previous photo"
+                  onClick={() => movePhoto(-1)}
+                >
+                  ‹
+                </button>
+
+                <button
+                  className="product-gallery__next"
+                  type="button"
+                  aria-label="Next photo"
+                  onClick={() => movePhoto(1)}
+                >
+                  ›
+                </button>
               </>
             )}
           </div>
-          <p className="product-gallery__counter" aria-live="polite">Photo {photoIndex + 1} of {photos.length} · Preview images</p>
+
+          <p className="product-gallery__counter" aria-live="polite">
+            Photo {photoIndex + 1} of {photos.length} · Preview images
+          </p>
+
           {photos.length > 1 && (
-            <div className="menu-card__thumbnails" role="group" aria-label="Choose a gallery photo">
+            <div
+              className="menu-card__thumbnails"
+              role="group"
+              aria-label="Choose a gallery photo"
+            >
               {photos.map((entry, index) => (
                 <button
                   key={`${entry.src}-${index}`}
                   type="button"
-                  className={`menu-card__thumbnail${photoIndex === index ? " is-selected" : ""}`}
+                  className={`menu-card__thumbnail${photoIndex === index ? " is-selected" : ""
+                    }`}
                   aria-label={`View photo ${index + 1}`}
                   aria-pressed={photoIndex === index}
                   onClick={() => setPhotoIndex(index)}
                 >
-                  <Image unoptimized src={entry.src} alt="" fill sizes="56px" />
+                  <Image
+                    unoptimized
+                    src={entry.src}
+                    alt=""
+                    fill
+                    sizes="56px"
+                  />
                 </button>
               ))}
             </div>

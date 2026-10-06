@@ -1,0 +1,766 @@
+/* Import after globals.css. Desktop styles and hero animations stay unchanged. */
+
+@media screen and (max-width: 1020px) {
+    .food-section {
+        padding-block: 44px;
+    }
+
+    .food-section .menu-grid,
+    .deals-section__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .food-section .food-section__heading h2 {
+        font-size: clamp(48px, 7vw, 72px);
+    }
+
+    .deals-section h2 {
+        font-size: clamp(62px, 9vw, 92px);
+    }
+
+    .deals-section {
+        padding-block: 44px;
+    }
+
+    .food-section .food-section__heading {
+        gap: 18px;
+        margin-bottom: 22px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    html {
+        scroll-padding-top: 82px;
+    }
+
+    .food-section>.wrap,
+    .visit-banner>.wrap,
+    .brand-footer>.wrap,
+    .intro.wrap,
+    .cart-page.wrap {
+        width: calc(100% - 24px);
+    }
+
+    .menu-header,
+    .menu-header.is-scrolled {
+        height: 68px;
+    }
+
+    .menu-header__inner {
+        width: calc(100% - 24px);
+        gap: 8px;
+    }
+
+    .menu-header__brand {
+        min-width: 0;
+        gap: 6px;
+    }
+
+    .menu-header__brand img,
+    .menu-header.is-scrolled .menu-header__brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-header__brand>span {
+        font-size: clamp(21px, 6vw, 26px);
+    }
+
+    .menu-header__brand small,
+    .menu-header__cart>span {
+        display: none;
+    }
+
+    .menu-header__actions {
+        flex-shrink: 0;
+        gap: 7px;
+    }
+
+    .menu-header__cart {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 8px;
+        gap: 5px;
+    }
+
+    .menu-header__links {
+        left: 12px;
+        right: 12px;
+        max-height: calc(100dvh - 92px);
+    }
+
+    .food-section,
+    .deals-section {
+        padding-block: 30px;
+    }
+
+    .food-section .food-section__heading {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 16px;
+    }
+
+    .food-section__title {
+        gap: 10px;
+    }
+
+    .food-section__number {
+        width: 30px;
+        height: 38px;
+        font-size: 23px;
+    }
+
+    .food-section .food-section__heading .kicker {
+        font-size: 8px;
+        letter-spacing: .1em;
+    }
+
+    .food-section .food-section__heading h2 {
+        margin-top: 6px;
+        font-size: clamp(34px, 9vw, 52px);
+        line-height: 1;
+    }
+
+    .food-section__details {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .food-section .food-section__heading p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .food-section .food-section__count {
+        font-size: 9px;
+        gap: 7px;
+    }
+
+    .food-section__count strong {
+        min-width: 25px;
+        height: 24px;
+        font-size: 11px;
+    }
+
+    .food-section .menu-grid,
+    .deals-section__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .food-section .menu-grid>p {
+        grid-column: 1 / -1;
+    }
+
+    .food-section .menu-card {
+        min-width: 0;
+        padding: 6px 6px 0;
+        border-radius: 14px;
+    }
+
+    .food-section .menu-card__image {
+        aspect-ratio: 1 / 1;
+        border-radius: 9px;
+    }
+
+    .food-section .menu-card__price {
+        top: 6px;
+        right: 6px;
+        gap: 3px;
+        padding: 6px 7px;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .food-section .menu-card__price small {
+        font-size: 8px;
+    }
+
+    .food-section .menu-card__tag {
+        bottom: 30px;
+        left: 5px;
+        padding: 4px;
+        font-size: 6px;
+        letter-spacing: .04em;
+    }
+
+    .food-section .menu-card__view {
+        bottom: 5px;
+        right: 5px;
+        padding: 4px 5px;
+        font-size: 8px;
+    }
+
+    .menu-card__thumbnails {
+        min-width: 0;
+        gap: 5px;
+        padding: 7px 0 0;
+    }
+
+    .menu-card__thumbnail {
+        flex-basis: 44px;
+        height: 44px;
+        border-radius: 6px;
+    }
+
+    .food-section .menu-card__body {
+        min-width: 0;
+        padding: 12px 3px 10px;
+    }
+
+    .menu-card__category {
+        margin-bottom: 6px;
+        font-size: 8px;
+        letter-spacing: .06em;
+    }
+
+    .food-section .menu-card h3 {
+        margin: 0;
+        font-size: clamp(16px, 4.4vw, 21px);
+        line-height: 1.2;
+        letter-spacing: -.025em;
+        overflow-wrap: anywhere;
+    }
+
+    .food-section .menu-card__body>p {
+        min-height: 0;
+        margin: 8px 0 12px;
+        font-size: 12px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+    }
+
+    .food-section .menu-card__order {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
+        gap: 8px;
+        padding-top: 10px;
+    }
+
+    .menu-card__quantity {
+        min-width: 0;
+        gap: 4px;
+    }
+
+    .menu-card__quantity>span {
+        font-size: 10px;
+    }
+
+    .food-section .quantity-control {
+        display: flex;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .food-section .quantity-control button {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .food-section .quantity-control output {
+        flex: 1;
+        min-width: 20px;
+        font-size: 13px;
+    }
+
+    .food-section .menu-card__add {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        gap: 5px;
+        padding: 8px 5px;
+        font-size: 11px;
+        white-space: normal;
+    }
+
+    .food-section .menu-card__add svg {
+        flex-shrink: 0;
+        width: 15px;
+        height: 15px;
+    }
+
+    .food-section .menu-card__unavailable {
+        padding: 12px 0;
+        font-size: 11px;
+    }
+
+    .food-section .menu-note,
+    .deals-section__note {
+        margin-top: 16px;
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+    .deals-section__heading {
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .deals-section h2 {
+        margin-block: 8px;
+        font-size: clamp(42px, 11vw, 62px);
+    }
+
+    .deals-section__tagline {
+        font-size: 17px;
+        line-height: 1.35;
+    }
+
+    .deals-section__intro p {
+        margin-block: 8px 0;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .deal-offer {
+        padding: 3px;
+        border-radius: 17px;
+    }
+
+    .deal-offer__label {
+        gap: 5px;
+        padding: 8px 5px;
+        font-size: 7px;
+        letter-spacing: .04em;
+    }
+
+    .deal-offer__label b {
+        flex-shrink: 0;
+        font-size: 18px;
+    }
+
+    .deals-section .menu-card {
+        padding-inline: 4px;
+        border-radius: 12px;
+    }
+
+    .deals-section .menu-card h3 {
+        font-size: clamp(19px, 5vw, 24px);
+    }
+
+    .intro {
+        padding-block: 32px;
+    }
+
+    .intro h2 {
+        font-size: clamp(38px, 10vw, 56px);
+    }
+
+    .intro .intro-tagline {
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    .intro .intro-description {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .intro-details {
+        gap: 14px;
+        padding-top: 16px;
+    }
+
+    .intro-details strong {
+        font-size: 13px;
+    }
+
+    .visit-banner {
+        padding-block: 32px;
+    }
+
+    .visit-banner__layout {
+        gap: 20px;
+    }
+
+    .visit-banner__copy h2 {
+        margin-block: 16px;
+        font-size: clamp(40px, 11vw, 60px);
+    }
+
+    .visit-banner__copy p {
+        margin-bottom: 16px;
+        font-size: 13px;
+    }
+
+    .visit-banner__card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .visit-banner__card h3 {
+        margin-block: 16px;
+        font-size: 30px;
+    }
+
+    .visit-banner__card dl {
+        margin-bottom: 16px;
+    }
+
+    .visit-banner__card dl>div {
+        padding-block: 12px;
+    }
+
+    .visit-banner__card dd {
+        font-size: 13px;
+    }
+
+    .visit-banner__menu,
+    .visit-banner__action {
+        min-height: 44px;
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+
+    .brand-footer__layout {
+        gap: 20px;
+        padding-block: 24px;
+    }
+
+    .brand-footer__logo {
+        height: 190px;
+        padding: 0;
+        background: transparent;
+    }
+
+    .brand-footer__logo img {
+        width: 90%;
+        height: 90%;
+        transform: none;
+    }
+
+    .brand-footer__details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .brand-footer__details>div {
+        min-width: 0;
+    }
+
+    .brand-footer__details h2 {
+        font-size: 24px;
+    }
+
+    .brand-footer__menu a {
+        min-height: 44px;
+        font-size: 12px;
+    }
+
+    .brand-footer__contact p {
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    .brand-footer__bottom {
+        gap: 16px;
+        padding-block: 20px;
+        font-size: 11px;
+    }
+
+    .brand-footer__back {
+        min-height: 44px;
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .cart-page {
+        padding-block: 24px 36px;
+    }
+
+    .checkout-panel,
+    .checkout-summary {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .checkout-panel__heading h2 {
+        font-size: 25px;
+    }
+
+    .checkout-fields input,
+    .checkout-fields select,
+    .checkout-fields textarea {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    .product-gallery {
+        width: calc(100% - 20px);
+        max-height: calc(100dvh - 20px);
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .food-section .menu-grid,
+    .deals-section__grid {
+        gap: 8px;
+    }
+
+    .food-section .menu-card h3 {
+        font-size: 16px;
+    }
+
+    .deals-section .menu-card h3 {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 700px) and (hover: none) {
+    .food-section .menu-card:hover {
+        transform: none;
+    }
+}
+
+/* Compact product and deal cards on all screen sizes. */
+@media screen {
+    .food-section .menu-card__image {
+        aspect-ratio: 16 / 10;
+    }
+
+    .food-section .menu-card__body {
+        padding: 14px 8px;
+    }
+
+    .food-section .menu-card__body>p {
+        min-height: 0;
+        margin: 8px 0 12px;
+    }
+
+    .food-section .menu-card__order {
+        padding-top: 10px;
+    }
+
+    .food-section .menu-card__thumbnails {
+        padding-top: 8px;
+    }
+
+    .food-section .menu-card__category {
+        margin-bottom: 5px;
+    }
+
+    .food-section .menu-card__unavailable {
+        padding-block: 12px;
+    }
+}
+
+/* Further reduce spacing inside mobile cards. */
+@media screen and (max-width: 700px) {
+    .food-section .menu-card__body {
+        padding: 8px 3px 9px;
+    }
+
+    .food-section .menu-card__body>p {
+        margin: 6px 0 8px;
+        line-height: 1.4;
+    }
+
+    .food-section .menu-card__thumbnails {
+        padding-top: 5px;
+    }
+
+    .food-section .menu-card__order {
+        gap: 6px;
+        padding-top: 6px;
+    }
+
+    .food-section .menu-card__quantity {
+        gap: 2px;
+    }
+}
+
+/* Compact ordering controls on one row. */
+@media screen {
+    .food-section .menu-card__order {
+        display: grid;
+        grid-template-columns: 90px minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+    }
+
+    .food-section .menu-card__quantity>span {
+        display: none;
+    }
+
+    .food-section .menu-card__quantity {
+        min-width: 0;
+    }
+
+    .food-section .quantity-control {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
+        width: 100%;
+        min-width: 0;
+    }
+
+    .food-section .quantity-control button {
+        width: 100%;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .food-section .quantity-control output {
+        min-width: 0;
+        font-size: 12px;
+    }
+
+    .food-section .menu-card__add {
+        min-width: 0;
+        min-height: 40px;
+        padding: 7px 8px;
+        gap: 5px;
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .food-section .menu-card__order {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        gap: 5px;
+    }
+
+    .food-section .quantity-control {
+        grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+    }
+
+    .food-section .quantity-control button {
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .food-section .menu-card__add {
+        min-height: 38px;
+        padding: 5px 3px;
+        font-size: 10px;
+        line-height: 1.2;
+        white-space: normal;
+    }
+
+    .food-section .menu-card__add svg {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .brand-footer .brand-footer__layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: start;
+        gap: 24px;
+        padding-block: 24px;
+    }
+
+    .brand-footer .brand-footer__brand {
+        position: static;
+        min-width: 0;
+        margin: 0;
+        transform: none;
+    }
+
+    .brand-footer .brand-footer__logo {
+        position: static;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 190px;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        transform: none;
+    }
+
+    .brand-footer .brand-footer__logo img {
+        position: static;
+        display: block;
+        width: 100%;
+        max-width: 260px;
+        height: 180px;
+        max-height: 100%;
+        margin: 0;
+        object-fit: contain;
+        object-position: center;
+        transform: none;
+    }
+
+    .brand-footer .brand-footer__details {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        gap: 18px 16px;
+        min-width: 0;
+        margin: 0;
+        transform: none;
+    }
+
+    .brand-footer .brand-footer__details>* {
+        min-width: 0;
+    }
+
+    .brand-footer .brand-footer__details h2 {
+        margin-bottom: 14px;
+        font-size: 24px;
+        line-height: 1.1;
+    }
+
+    .brand-footer .brand-footer__cart {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .brand-footer .brand-footer__bottom {
+        position: static;
+        margin-top: 0;
+        transform: none;
+    }
+}
+
+.brand-footer .brand-footer__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.brand-footer .brand-footer__actions .brand-footer__cart,
+.brand-footer .brand-footer__actions .brand-footer__back {
+    min-height: 46px;
+    margin: 0;
+    padding: 8px 12px;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.brand-footer .brand-footer__actions .brand-footer__back>span {
+    width: 30px;
+    height: 30px;
+}
+
+@media screen and (max-width: 700px) {
+    .brand-footer .brand-footer__actions {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .brand-footer .brand-footer__actions .brand-footer__cart,
+    .brand-footer .brand-footer__actions .brand-footer__back {
+        flex: 1;
+        min-width: 0;
+        justify-content: center;
+        padding-inline: 10px;
+        gap: 8px;
+        font-size: 12px;
+    }
+}

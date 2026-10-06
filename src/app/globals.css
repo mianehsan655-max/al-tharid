@@ -2629,16 +2629,18 @@ em {
     width: 100%;
     height: clamp(260px, 30vw, 400px);
     place-items: center;
-    padding: 28px;
-    border-radius: 22px;
-    background: var(--cream);
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
 }
 
 .brand-footer__logo img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     object-fit: contain;
+    object-position: center;
+    transform: translateY(-70px);
 }
 
 .brand-footer__brand p {
@@ -2753,7 +2755,8 @@ em {
     padding: 6px 7px 6px 20px;
     border: 1px solid var(--yellow);
     border-radius: 999px;
-    color: var(--yellow);
+    background: var(--yellow);
+    color: var(--ink);
     font-size: 13px;
     font-weight: 600;
     transition: background .2s ease, color .2s ease;

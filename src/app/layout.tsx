@@ -4,6 +4,7 @@ import CartProvider from "./CartProvider";
 import Footer from "./Footer";
 import { getSite } from "@/lib/store";
 import "./globals.css";
+import "./mobile.css";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { settings } = await getSite();
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <CartProvider>
           <a className="skip" href="#main">Skip to content</a>
