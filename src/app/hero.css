@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap');
+
+.orbital-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(circle at 75% 48%, #ffdb67 0, transparent 38%), var(--yellow);
+}
+
+.orbital-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .12;
+  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.orbital-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+  min-height: 550px;
+  align-items: center;
+}
+
+.orbital-hero__copy {
+  position: relative;
+  z-index: 5;
+  min-width: 0;
+  padding: 45px 18px 35px 0;
+}
+
+.orbital-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .23em;
+  text-transform: uppercase;
+}
+
+.orbital-hero__eyebrow span {
+  color: var(--red);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.orbital-hero h1 {
+  margin: 28px 0 18px;
+  font-family: 'Barlow Condensed', Impact, 'Arial Narrow', sans-serif;
+  font-size: clamp(72px, 7vw, 112px);
+  font-weight: 800;
+  line-height: .87;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+.orbital-hero__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: .11em;
+  margin-bottom: -.11em;
+}
+
+.orbital-hero__line>span {
+  display: block;
+  animation: orbit-text-in 1s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.orbital-hero__line:nth-child(2)>span {
+  animation-delay: 0s;
+}
+
+.orbital-hero__line:nth-child(3)>span {
+  animation-delay: 0s;
+}
+
+.orbital-hero__accent {
+  color: var(--cream);
+  text-shadow: 3px 4px 0 var(--ink);
+}
+
+.orbital-hero__description {
+  max-width: 435px;
+  min-height: 52px;
+  margin-bottom: 22px;
+  font-size: 15px;
+  line-height: 1.6;
+  animation: orbit-fade-in 1s ease both;
+}
+
+.orbital-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 17px;
+  animation: orbit-fade-in 1s ease both;
+}
+
+.orbital-hero__hours {
+  font-size: 11px;
+  font-weight: 800;
+  color: #634215;
+}
+
+.orbital-hero__footnote {
+  display: block;
+  margin-top: 34px;
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .17em;
+}
+
+.orbital-hero__showcase {
+  --orbit-radius: 85px;
+  --preview-offset: 130px;
+  --front-scale: 1.4;
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+}
+
+.orbital-hero__food {
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  width: min(65%, 350px);
+  aspect-ratio: 1;
+  filter: drop-shadow(12px 25px 16px #75411455);
+  pointer-events: none;
+  will-change: transform;
+  transition: left 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1), opacity .7s, filter .7s;
+}
+
+.orbital-hero__food img {
+  object-fit: contain;
+}
+
+.orbital-hero__food:not(.is-active) {
+  opacity: .58;
+  filter: blur(3px) drop-shadow(8px 13px 9px #75411433);
+}
+
+.orbital-hero__progress {
+  position: absolute;
+  bottom: 27px;
+  left: 50%;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transform: translateX(-50%);
+}
+
+.orbital-hero__progress>span {
+  width: 24px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #41270f55;
+}
+
+.orbital-hero__progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.orbital-hero__progress .is-active i {
+  animation: orbit-progress 4s linear forwards;
+}
+
+@keyframes orbit-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes orbit-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes orbit-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 1050px) {
+  .orbital-hero__layout {
+    min-height: 500px;
+  }
+
+  .orbital-hero h1 {
+    font-size: clamp(65px, 7vw, 82px);
+  }
+
+  .orbital-hero__showcase {
+    --orbit-radius: 72px;
+    --preview-offset: 105px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 720px) {
+  .orbital-hero__layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .orbital-hero__copy {
+    width: 100%;
+    padding: 35px 0 0;
+  }
+
+  .orbital-hero h1 {
+    margin: 18px 0 12px;
+    font-size: clamp(64px, 13vw, 84px);
+  }
+
+  .orbital-hero__description {
+    min-height: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+  }
+
+  .orbital-hero__footnote {
+    display: none;
+  }
+
+  .orbital-hero__showcase {
+    --orbit-radius: 57px;
+    --preview-offset: 75px;
+    --front-scale: 1.3;
+    height: 335px;
+  }
+
+  .orbital-hero__food {
+    width: min(65%, 265px);
+  }
+
+  .orbital-hero__progress {
+    bottom: 10px;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .orbital-hero h1 {
+    font-size: 62px;
+  }
+
+  .orbital-hero__showcase {
+    --orbit-radius: 50px;
+    --preview-offset: 65px;
+    height: 310px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .orbital-hero__line>span,
+  .orbital-hero__description,
+  .orbital-hero__actions,
+  .orbital-hero__progress .is-active i {
+    animation: none;
+  }
+
+  .orbital-hero__food {
+    transition: none;
+  }
+}

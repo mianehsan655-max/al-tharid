@@ -1,0 +1,212 @@
+{
+  "settings": {
+    "phone": "",
+    "whatsapp": "",
+    "address": "Jaranwala, Punjab, Pakistan",
+    "hours": "Opening soon",
+    "announcement": "A new craving is coming to Jaranwala.",
+    "instagram": "",
+    "facebook": "",
+    "mapsUrl": ""
+  },
+  "items": [
+    {
+      "id": "SH01",
+      "category": "Shawarma",
+      "name": "Classic Garlic",
+      "description": "Creamy garlic notes, made for the classic craving.",
+      "price": 360,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "SH02",
+      "category": "Shawarma",
+      "name": "Spicy Arabic",
+      "description": "A bolder, warm spice profile.",
+      "price": 390,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "SH03",
+      "category": "Shawarma",
+      "name": "Smoky BBQ",
+      "description": "Sweet, savoury and smoky.",
+      "price": 410,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "SH04",
+      "category": "Shawarma",
+      "name": "Jalapeño Cheese",
+      "description": "A creamy kick with jalapeño heat.",
+      "price": 430,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "SH05",
+      "category": "Shawarma",
+      "name": "Al-Tharid Special",
+      "description": "Our signature flavour, still being perfected.",
+      "price": 450,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "BG01",
+      "category": "Burger",
+      "name": "Crispy Classic",
+      "description": "The satisfying crunch you come back for.",
+      "price": 520,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "BG02",
+      "category": "Burger",
+      "name": "Spicy Zinger",
+      "description": "A lively, spicy crispy chicken burger.",
+      "price": 570,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "BG03",
+      "category": "Burger",
+      "name": "Smoky BBQ",
+      "description": "Rich barbecue flavours in every bite.",
+      "price": 590,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "BG04",
+      "category": "Burger",
+      "name": "Jalapeño Cheese",
+      "description": "Melted comfort with a little heat.",
+      "price": 620,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "BG05",
+      "category": "Burger",
+      "name": "Al-Tharid Special",
+      "description": "Our own signature take on the burger.",
+      "price": 650,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "FR01",
+      "category": "Loaded Fries",
+      "name": "Classic Cheesy",
+      "description": "Golden fries, generously cheesy.",
+      "price": 390,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "FR02",
+      "category": "Loaded Fries",
+      "name": "Spicy Chicken",
+      "description": "Loaded with flavour and a fiery finish.",
+      "price": 490,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "FR03",
+      "category": "Loaded Fries",
+      "name": "BBQ Loaded",
+      "description": "Smoky, saucy and seriously satisfying.",
+      "price": 520,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "FR04",
+      "category": "Loaded Fries",
+      "name": "Jalapeño Cheese",
+      "description": "Creamy cheese meets jalapeño heat.",
+      "price": 480,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "FR05",
+      "category": "Loaded Fries",
+      "name": "Al-Tharid Special",
+      "description": "A house favourite in the making.",
+      "price": 550,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DR01",
+      "category": "Cold Drinks",
+      "name": "Soft Drink",
+      "description": "Chilled fizzy refreshment. Brand and serving size to be confirmed.",
+      "price": 120,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DR02",
+      "category": "Cold Drinks",
+      "name": "Mineral Water",
+      "description": "Refreshing bottled water. Serving size to be confirmed.",
+      "price": 80,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DR03",
+      "category": "Cold Drinks",
+      "name": "Fresh Lime",
+      "description": "A cool citrus drink for a bright finish.",
+      "price": 220,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DR04",
+      "category": "Cold Drinks",
+      "name": "Mint Lemonade",
+      "description": "Chilled lemon and mint, made to refresh.",
+      "price": 250,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DL01",
+      "category": "Deals",
+      "name": "Solo Crunch Combo",
+      "description": "1 Crispy Classic Burger + 1 Loaded Fries + 1 Cold Drink. A complete meal for one.",
+      "price": 990,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DL02",
+      "category": "Deals",
+      "name": "Shawarma Duo",
+      "description": "2 Classic Garlic Shawarmas + 1 Loaded Fries + 2 Cold Drinks. Made for sharing.",
+      "price": 1390,
+      "published": true,
+      "available": true
+    },
+    {
+      "id": "DL03",
+      "category": "Deals",
+      "name": "The Tharid Feast",
+      "description": "2 Crispy Classic Burgers + 2 Classic Garlic Shawarmas + 2 Loaded Fries + 4 Cold Drinks. Bring your appetite.",
+      "price": 2890,
+      "published": true,
+      "available": true
+    }
+  ]
+}

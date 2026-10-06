@@ -1,0 +1,313 @@
+/* Paste this block at the end of globals.css. It affects only menu sections. */
+
+.food-section {
+    padding: 84px 0;
+}
+
+.food-section .food-section__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(240px, .8fr);
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 34px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #20191120;
+}
+
+.food-section__title {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    min-width: 0;
+}
+
+.food-section__number {
+    display: grid;
+    flex: none;
+    width: 56px;
+    height: 64px;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--yellow);
+    font-family: 'Barlow Condensed', Impact, sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    transform: rotate(-5deg);
+}
+
+.food-section .food-section__heading .kicker {
+    font-size: 10px;
+    letter-spacing: .18em;
+}
+
+.food-section .food-section__heading h2 {
+    margin: 10px 0 0;
+    font-family: 'Barlow Condensed', Impact, sans-serif;
+    font-size: clamp(68px, 7.5vw, 108px);
+    font-weight: 800;
+    line-height: .92;
+    letter-spacing: -.025em;
+    text-transform: uppercase;
+}
+
+.food-section .food-section__heading .red-dot {
+    color: var(--yellow);
+}
+
+.food-section__details {
+    display: grid;
+    gap: 16px;
+}
+
+.food-section .food-section__heading p {
+    max-width: 380px;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.food-section .food-section__count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    font-size: 10px;
+    letter-spacing: .1em;
+}
+
+.food-section__count strong {
+    display: grid;
+    min-width: 30px;
+    height: 28px;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--yellow);
+    font-size: 13px;
+    letter-spacing: 0;
+}
+
+.food-section .menu-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.food-section .menu-card {
+    padding: 12px 12px 0;
+    border: 1px solid #20191118;
+    border-radius: 20px;
+    background: #fffdf8;
+    box-shadow: 0 8px 24px #20191106;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.food-section .menu-card:hover {
+    transform: translateY(-4px);
+    border-color: #20191140;
+    box-shadow: 0 16px 30px #20191110;
+}
+
+.food-section .menu-card__image {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    background: var(--paper);
+}
+
+.food-section .menu-card__image img {
+    object-fit: cover;
+}
+
+.food-section .menu-card__tag {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background: #201911c9;
+    font-size: 8px;
+    letter-spacing: .12em;
+}
+
+.menu-card__price {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    padding: 10px 13px;
+    border-radius: 8px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px #20191115;
+}
+
+.menu-card__price small {
+    font-size: 9px;
+    letter-spacing: .07em;
+}
+
+.food-section .menu-card__body {
+    padding: 22px 10px 20px;
+}
+
+.menu-card__category {
+    margin-bottom: 9px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.food-section .menu-card h3 {
+    font-size: clamp(23px, 2vw, 28px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.05em;
+}
+
+.food-section .menu-card__body > p {
+    min-height: 62px;
+    margin: 12px 0 20px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.food-section .menu-card__order {
+    align-items: end;
+    gap: 14px;
+    padding-top: 18px;
+    border-top: 1px solid #20191112;
+}
+
+.menu-card__quantity {
+    display: grid;
+    flex: none;
+    gap: 7px;
+}
+
+.menu-card__quantity > span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.food-section .quantity-control {
+    border-color: #20191122;
+    border-radius: 7px;
+    background: #fffdf8;
+}
+
+.food-section .quantity-control button {
+    width: 34px;
+    height: 44px;
+}
+
+.food-section .quantity-control output {
+    min-width: 25px;
+    font-weight: 600;
+}
+
+.food-section .menu-card__add {
+    gap: 10px;
+    min-height: 46px;
+    padding: 10px 14px;
+    border-radius: 7px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    transition: background .2s ease, color .2s ease;
+}
+
+.food-section .menu-card__add:hover {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.food-section .menu-card__add:focus-visible,
+.food-section .quantity-control button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -4px;
+}
+
+.food-section .menu-card.is-unavailable .menu-card__image img {
+    opacity: .55;
+}
+
+.food-section .menu-card__unavailable {
+    padding: 22px 0;
+    border-top: 1px solid #20191112;
+}
+
+.food-section .menu-note {
+    max-width: 750px;
+    margin-top: 26px;
+    font-size: 11px;
+}
+
+@media (max-width: 1020px) {
+    .food-section .food-section__heading {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .food-section__details {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .food-section .food-section__heading p {
+        max-width: 550px;
+    }
+
+    .food-section .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .food-section {
+        padding: 56px 0;
+    }
+
+    .food-section__title {
+        gap: 14px;
+    }
+
+    .food-section__number {
+        width: 39px;
+        height: 48px;
+        font-size: 26px;
+    }
+
+    .food-section .food-section__heading h2 {
+        font-size: clamp(48px, 10.5vw, 65px);
+    }
+
+    .food-section__details {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .food-section .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .food-section .menu-card__image {
+        aspect-ratio: 16 / 11;
+    }
+
+    .food-section .menu-card h3 {
+        font-size: 26px;
+    }
+
+    .food-section .menu-card__body > p {
+        min-height: 0;
+    }
+}

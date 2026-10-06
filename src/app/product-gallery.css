@@ -1,0 +1,194 @@
+/* Append after the existing menu styles in globals.css. */
+
+.food-section .menu-card__image-open {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+}
+
+.food-section .menu-card__image-open:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: -5px;
+}
+
+.food-section .menu-card__tag,
+.food-section .menu-card__price,
+.food-section .menu-card__view {
+    pointer-events: none;
+}
+
+.menu-card__view {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    background: #fff9eeed;
+    color: var(--ink);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.menu-card__thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 1px 2px;
+    scrollbar-width: thin;
+    scrollbar-color: #20191144 transparent;
+}
+
+.menu-card__thumbnail {
+    position: relative;
+    flex: 0 0 56px;
+    height: 45px;
+    overflow: hidden;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    background: var(--paper);
+    opacity: .6;
+    transition: opacity .2s ease, border-color .2s ease;
+}
+
+.menu-card__thumbnail img {
+    object-fit: cover;
+}
+
+.menu-card__thumbnail:hover,
+.menu-card__thumbnail.is-selected {
+    opacity: 1;
+}
+
+.menu-card__thumbnail.is-selected {
+    border-color: var(--ink);
+}
+
+.menu-card__thumbnail:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -4px;
+}
+
+.product-gallery {
+    width: min(900px, calc(100% - 32px));
+    max-height: calc(100dvh - 40px);
+    overflow: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    background: var(--cream);
+    color: var(--ink);
+    box-shadow: 0 24px 80px #00000044;
+}
+
+.product-gallery::backdrop {
+    background: #201911b8;
+    backdrop-filter: blur(5px);
+}
+
+.product-gallery__content {
+    padding: 24px;
+}
+
+.product-gallery__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.product-gallery__header span {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    color: var(--muted);
+}
+
+.product-gallery__header h2 {
+    margin: 7px 0 0;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -.04em;
+}
+
+.product-gallery__close {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--ink);
+    font-size: 28px;
+}
+
+.product-gallery__image {
+    position: relative;
+    height: min(55dvh, 520px);
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--paper);
+}
+
+.product-gallery__image img {
+    object-fit: contain;
+}
+
+.product-gallery__previous,
+.product-gallery__next {
+    position: absolute;
+    top: 50%;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 32px;
+    transform: translateY(-50%);
+}
+
+.product-gallery__previous {
+    left: 12px;
+}
+
+.product-gallery__next {
+    right: 12px;
+}
+
+.product-gallery__counter {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+}
+
+.product-gallery__close:focus-visible,
+.product-gallery__previous:focus-visible,
+.product-gallery__next:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .product-gallery {
+        width: calc(100% - 20px);
+    }
+
+    .product-gallery__content {
+        padding: 16px;
+    }
+
+    .product-gallery__image {
+        height: 45dvh;
+    }
+}
