@@ -1,5 +1,7 @@
 import "server-only";
 import { createHash, randomUUID } from "node:crypto";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { getSite } from "./store";
 import { getBusiness } from "./business";
 import type { CollectionChannel, StaffOrderInput } from "./businessTypes";
@@ -16,10 +18,14 @@ import type {
 import {
   database,
   jsonParameter,
+  readLocalJson,
   readState,
+  useLocalStorageMode,
   withDatabaseTransaction,
+  writeLocalJson,
   writeState,
 } from "./db";
+
 const defaults: CheckoutSettings = {
   orderingEnabled: true,
   pickupEnabled: true,
@@ -55,6 +61,15 @@ function text(input: unknown, label: string, max: number, min = 0) {
   return value;
 }
 
+export function normalizePakistanPhone(rawPhone: string): string {
+  const digits = rawPhone.trim().replace(/\D/g, "");
+  return digits.startsWith("0092")
+    ? digits.slice(2)
+    : digits.startsWith("03")
+      ? `92${digits.slice(1)}`
+      : digits;
+}
+
 function normalizeInput(raw: CheckoutInput, staff = false): CheckoutInput {
   if (!raw || typeof raw !== "object")
     throw new Error("Invalid checkout request.");
@@ -86,12 +101,7 @@ function normalizeInput(raw: CheckoutInput, staff = false): CheckoutInput {
     throw new Error("Choose pickup or home delivery.");
   if (raw.paymentMethod !== "cash" && raw.paymentMethod !== "online")
     throw new Error("Choose a payment method.");
-  const digits = text(raw.phone, "your phone number", 30).replace(/\D/g, "");
-  const phone = digits.startsWith("0092")
-    ? digits.slice(2)
-    : digits.startsWith("03")
-      ? `92${digits.slice(1)}`
-      : digits;
+  const phone = normalizePakistanPhone(text(raw.phone, "your phone number", 30));
   if (!(staff && !phone) && !/^923\d{9}$/.test(phone))
     throw new Error(
       "Enter a Pakistani mobile number, for example 03001234567.",
@@ -191,6 +201,9 @@ export async function saveCheckoutSettings(settings: CheckoutSettings) {
 
 async function readOrder(requestId: string): Promise<Order | null> {
   const key = validateRequestId(requestId);
+  if (useLocalStorageMode()) {
+    return readLocalJson<Order | null>(`orders/${key}.json`, null);
+  }
   const rows =
     await database()`select data from al_tharid.orders where request_id = ${key}::uuid`;
   return rows.length ? (rows[0].data as Order) : null;
@@ -242,6 +255,15 @@ export function orderDate(date: Date): string {
 
 async function nextOrderNumber(date: Date): Promise<string> {
   const day = orderDate(date);
+  if (useLocalStorageMode()) {
+    const seq = await readLocalJson<{ last: number }>(
+      `order-sequences/${day}.json`,
+      { last: 0 },
+    );
+    const next = (seq.last || 0) + 1;
+    await writeLocalJson(`order-sequences/${day}.json`, { last: next });
+    return `AT-${day}${next}`;
+  }
   const rows = await database()`
     insert into al_tharid.order_sequences (day, last) values (${day}, 1)
     on conflict (day) do update set last = al_tharid.order_sequences.last + 1
@@ -342,18 +364,32 @@ async function saveNewOrder(
       throw new Error(
         "Prices or delivery charges have changed. Refresh this page and review your total before ordering.",
       );
-    // Persist the limit across restarts and serverless instances.
+
     const now = Date.now();
     if (!staff) {
-      const recent = await database()`
-        select count(*)::integer as count from al_tharid.orders
-        where phone = ${input.phone} and source = 'website'
-          and created_at > ${new Date(now - 600000).toISOString()}::timestamptz
-      `;
-      if (recent[0].count >= 10)
-        throw new Error(
-          "Too many orders from this number. Please contact the restaurant or try again in 10 minutes.",
-        );
+      if (useLocalStorageMode()) {
+        const all = await listAllOrdersInternal();
+        const recentCount = all.filter(
+          (o) =>
+            o.phone === input.phone &&
+            (o.source ?? "website") === "website" &&
+            Date.parse(o.createdAt) > now - 600000,
+        ).length;
+        if (recentCount >= 10)
+          throw new Error(
+            "Too many orders from this number. Please contact the restaurant or try again in 10 minutes.",
+          );
+      } else {
+        const recent = await database()`
+          select count(*)::integer as count from al_tharid.orders
+          where phone = ${input.phone} and source = 'website'
+            and created_at > ${new Date(now - 600000).toISOString()}::timestamptz
+        `;
+        if (recent[0].count >= 10)
+          throw new Error(
+            "Too many orders from this number. Please contact the restaurant or try again in 10 minutes.",
+          );
+      }
     }
 
     const at = new Date(now).toISOString();
@@ -406,13 +442,47 @@ async function saveNewOrder(
         },
       ],
     };
-    await database()`
-      insert into al_tharid.orders (request_id, number, created_at, phone, source, data)
-      values (${order.requestId}::uuid, ${order.number}, ${order.createdAt}::timestamptz,
-              ${order.phone}, ${order.source ?? "website"}, ${jsonParameter(order)}::jsonb)
-    `;
+
+    if (useLocalStorageMode()) {
+      await writeLocalJson(`orders/${order.requestId}.json`, order);
+    } else {
+      await database()`
+        insert into al_tharid.orders (request_id, number, created_at, phone, source, data)
+        values (${order.requestId}::uuid, ${order.number}, ${order.createdAt}::timestamptz,
+                ${order.phone}, ${order.source ?? "website"}, ${jsonParameter(order)}::jsonb)
+      `;
+    }
     return receiptFor(order);
   });
+}
+
+async function listAllOrdersInternal(): Promise<Order[]> {
+  if (useLocalStorageMode()) {
+    const dir = path.join(process.cwd(), "data", "orders");
+    try {
+      const files = await fs.readdir(dir);
+      const orders: Order[] = [];
+      for (const file of files) {
+        if (!file.endsWith(".json")) continue;
+        try {
+          const order = await readLocalJson<Order>(`orders/${file}`);
+          if (order && order.id) orders.push(order);
+        } catch {
+          // Ignore malformed file
+        }
+      }
+      return orders.sort(
+        (a, b) =>
+          Date.parse(b.createdAt) - Date.parse(a.createdAt) ||
+          b.number.localeCompare(a.number),
+      );
+    } catch {
+      return [];
+    }
+  }
+  const rows =
+    await database()`select data from al_tharid.orders order by created_at desc, number desc`;
+  return rows.map((row) => row.data as Order);
 }
 
 export async function listOrders(): Promise<Order[]> {
@@ -420,9 +490,7 @@ export async function listOrders(): Promise<Order[]> {
 }
 
 export async function listAllOrders(): Promise<Order[]> {
-  const rows =
-    await database()`select data from al_tharid.orders order by created_at desc, number desc`;
-  return rows.map((row) => row.data as Order);
+  return listAllOrdersInternal();
 }
 
 export async function updateOrder(
@@ -483,10 +551,14 @@ export async function updateOrder(
     order.updatedAt = new Date().toISOString();
     order.version += 1;
     order.history.push({ at: order.updatedAt, message });
-    await database()`
-      update al_tharid.orders set data = ${jsonParameter(order)}::jsonb
-      where request_id = ${order.requestId}::uuid
-    `;
+    if (useLocalStorageMode()) {
+      await writeLocalJson(`orders/${order.requestId}.json`, order);
+    } else {
+      await database()`
+        update al_tharid.orders set data = ${jsonParameter(order)}::jsonb
+        where request_id = ${order.requestId}::uuid
+      `;
+    }
     return order;
   });
 }

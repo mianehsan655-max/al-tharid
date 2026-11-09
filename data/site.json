@@ -1,13 +1,13 @@
 {
   "settings": {
-    "phone": "",
-    "whatsapp": "",
-    "address": "Jaranwala, Punjab, Pakistan",
-    "hours": "Opening soon",
-    "announcement": "A new craving is coming to Jaranwala.",
+    "phone": "+92 300 8668915",
+    "whatsapp": "923008668915",
+    "address": "Main City Center, Jaranwala, Punjab, Pakistan",
+    "hours": "Open Daily · 12:00 PM – 1:00 AM",
+    "announcement": "Now serving Jaranwala’s crispiest Chicken Broast, Zinger Burgers, Arabic Shawarma & Loaded Fries!",
     "instagram": "",
     "facebook": "",
-    "mapsUrl": ""
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Jaranwala+Punjab+Pakistan"
   },
   "items": [
     {
@@ -17,7 +17,13 @@
       "description": "Creamy garlic notes, made for the classic craving.",
       "price": 360,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-classic.jpg",
+        "/menu/shawarma-special.jpg"
+      ],
+      "badge": "CLASSIC",
+      "spiceLevel": "mild"
     },
     {
       "id": "SH02",
@@ -26,7 +32,13 @@
       "description": "A bolder, warm spice profile.",
       "price": 390,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-spicy.jpg",
+        "/menu/shawarma-classic.jpg"
+      ],
+      "badge": "SPICY 🔥",
+      "spiceLevel": "hot"
     },
     {
       "id": "SH03",
@@ -35,7 +47,12 @@
       "description": "Sweet, savoury and smoky.",
       "price": 410,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-special.jpg",
+        "/menu/shawarma-classic.jpg"
+      ],
+      "spiceLevel": "mild"
     },
     {
       "id": "SH04",
@@ -44,16 +61,27 @@
       "description": "A creamy kick with jalapeño heat.",
       "price": 430,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-spicy.jpg",
+        "/menu/shawarma-special.jpg"
+      ],
+      "spiceLevel": "medium"
     },
     {
       "id": "SH05",
       "category": "Shawarma",
       "name": "Al-Tharid Special",
-      "description": "Our signature flavour, still being perfected.",
+      "description": "Our signature double-sauce flavour, loaded with grilled chicken.",
       "price": 450,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-special.jpg",
+        "/menu/shawarma-spicy.jpg"
+      ],
+      "badge": "BESTSELLER",
+      "spiceLevel": "medium"
     },
     {
       "id": "BG01",
@@ -62,7 +90,13 @@
       "description": "The satisfying crunch you come back for.",
       "price": 520,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-classic.jpg",
+        "/menu/burger-special.jpg"
+      ],
+      "badge": "CRUNCH KING",
+      "spiceLevel": "mild"
     },
     {
       "id": "BG02",
@@ -71,7 +105,13 @@
       "description": "A lively, spicy crispy chicken burger.",
       "price": 570,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-spicy.jpg",
+        "/menu/burger-classic.jpg"
+      ],
+      "badge": "SPICY 🔥",
+      "spiceLevel": "hot"
     },
     {
       "id": "BG03",
@@ -80,7 +120,12 @@
       "description": "Rich barbecue flavours in every bite.",
       "price": 590,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-special.jpg",
+        "/menu/burger-classic.jpg"
+      ],
+      "spiceLevel": "mild"
     },
     {
       "id": "BG04",
@@ -89,16 +134,102 @@
       "description": "Melted comfort with a little heat.",
       "price": 620,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-spicy.jpg",
+        "/menu/burger-special.jpg"
+      ],
+      "spiceLevel": "medium"
     },
     {
       "id": "BG05",
       "category": "Burger",
       "name": "Al-Tharid Special",
-      "description": "Our own signature take on the burger.",
+      "description": "Our own signature double-crunch take on the burger.",
       "price": 650,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-special.jpg",
+        "/menu/burger-spicy.jpg"
+      ],
+      "badge": "CHEF'S SPECIAL",
+      "spiceLevel": "medium"
+    },
+    {
+      "id": "BR01",
+      "category": "Chicken Broast",
+      "name": "Crispy Quarter Broast",
+      "description": "2 golden pressure-fried chicken pieces with signature creamy garlic mayo dip, seasoned fries & soft toasted bun.",
+      "price": 620,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/broast-quarter.jpg",
+        "/menu/broast-garlic.jpg"
+      ],
+      "badge": "JARANWALA FAVOURITE",
+      "spiceLevel": "mild"
+    },
+    {
+      "id": "BR02",
+      "category": "Chicken Broast",
+      "name": "Spicy Masala Injected Broast",
+      "description": "Marinated & injected with fiery chili masala spices down to the bone, fried to an ultra-crunchy golden crust.",
+      "price": 680,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/broast-spicy.jpg",
+        "/menu/broast-quarter.jpg"
+      ],
+      "badge": "SPICY 🔥",
+      "spiceLevel": "hot"
+    },
+    {
+      "id": "BR03",
+      "category": "Chicken Broast",
+      "name": "Garlic Mayo Crunch Broast",
+      "description": "Crispy golden quarter broast drizzled generously with roasted garlic toum sauce, herbs & crinkle fries.",
+      "price": 660,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/broast-garlic.jpg",
+        "/menu/broast-quarter.jpg"
+      ],
+      "badge": "CHEF'S SPECIAL",
+      "spiceLevel": "mild"
+    },
+    {
+      "id": "BR04",
+      "category": "Chicken Broast",
+      "name": "Half Chicken Broast Platter",
+      "description": "4 juicy golden-fried chicken broast pieces (leg, thigh, breast, wing) with double fries, 2 buns & 2 dips.",
+      "price": 1180,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/broast-half.jpg",
+        "/menu/broast-quarter.jpg"
+      ],
+      "badge": "SHAREABLE",
+      "spiceLevel": "medium"
+    },
+    {
+      "id": "BR05",
+      "category": "Chicken Broast",
+      "name": "Al-Tharid Family Broast Bucket",
+      "description": "8 ultra-crispy golden broast pieces, large family fries, 4 dinner rolls, and 4 signature garlic & spicy dips.",
+      "price": 2250,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/broast-family.jpg",
+        "/menu/broast-half.jpg"
+      ],
+      "badge": "FAMILY FEAST",
+      "spiceLevel": "medium"
     },
     {
       "id": "FR01",
@@ -107,7 +238,12 @@
       "description": "Golden fries, generously cheesy.",
       "price": 390,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/fries-cheesy.jpg",
+        "/menu/fries-spicy.jpg"
+      ],
+      "spiceLevel": "mild"
     },
     {
       "id": "FR02",
@@ -116,7 +252,13 @@
       "description": "Loaded with flavour and a fiery finish.",
       "price": 490,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/fries-spicy.jpg",
+        "/menu/fries-cheesy.jpg"
+      ],
+      "badge": "SPICY 🔥",
+      "spiceLevel": "hot"
     },
     {
       "id": "FR03",
@@ -125,7 +267,12 @@
       "description": "Smoky, saucy and seriously satisfying.",
       "price": 520,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/fries-spicy.jpg",
+        "/menu/fries-cheesy.jpg"
+      ],
+      "spiceLevel": "mild"
     },
     {
       "id": "FR04",
@@ -134,34 +281,51 @@
       "description": "Creamy cheese meets jalapeño heat.",
       "price": 480,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/fries-cheesy.jpg",
+        "/menu/fries-spicy.jpg"
+      ],
+      "spiceLevel": "medium"
     },
     {
       "id": "FR05",
       "category": "Loaded Fries",
       "name": "Al-Tharid Special",
-      "description": "A house favourite in the making.",
+      "description": "A house favourite loaded with crispy chicken, cheese & sauces.",
       "price": 550,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/fries-spicy.jpg",
+        "/menu/fries-cheesy.jpg"
+      ],
+      "badge": "BESTSELLER",
+      "spiceLevel": "medium"
     },
     {
       "id": "DR01",
       "category": "Cold Drinks",
       "name": "Soft Drink",
-      "description": "Chilled fizzy refreshment. Brand and serving size to be confirmed.",
+      "description": "Chilled fizzy refreshment served ice-cold.",
       "price": 120,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/drink-mint.jpg"
+      ]
     },
     {
       "id": "DR02",
       "category": "Cold Drinks",
       "name": "Mineral Water",
-      "description": "Refreshing bottled water. Serving size to be confirmed.",
+      "description": "Refreshing chilled bottled water.",
       "price": 80,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/drink-mint.jpg"
+      ]
     },
     {
       "id": "DR03",
@@ -170,16 +334,23 @@
       "description": "A cool citrus drink for a bright finish.",
       "price": 220,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/drink-mint.jpg"
+      ]
     },
     {
       "id": "DR04",
       "category": "Cold Drinks",
       "name": "Mint Lemonade",
-      "description": "Chilled lemon and mint, made to refresh.",
+      "description": "Chilled lemon and fresh mint leaves, crushed ice refreshment.",
       "price": 250,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/drink-mint.jpg"
+      ],
+      "badge": "HOUSE FRESH"
     },
     {
       "id": "DL01",
@@ -188,7 +359,12 @@
       "description": "1 Crispy Classic Burger + 1 Loaded Fries + 1 Cold Drink. A complete meal for one.",
       "price": 990,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/burger-classic.jpg",
+        "/menu/fries-cheesy.jpg",
+        "/menu/drink-mint.jpg"
+      ]
     },
     {
       "id": "DL02",
@@ -197,7 +373,12 @@
       "description": "2 Classic Garlic Shawarmas + 1 Loaded Fries + 2 Cold Drinks. Made for sharing.",
       "price": 1390,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/shawarma-classic.jpg",
+        "/menu/fries-cheesy.jpg",
+        "/menu/drink-mint.jpg"
+      ]
     },
     {
       "id": "DL03",
@@ -206,7 +387,321 @@
       "description": "2 Crispy Classic Burgers + 2 Classic Garlic Shawarmas + 2 Loaded Fries + 4 Cold Drinks. Bring your appetite.",
       "price": 2890,
       "published": true,
-      "available": true
+      "available": true,
+      "images": [
+        "/menu/deal-combo.jpg",
+        "/menu/burger-special.jpg",
+        "/menu/shawarma-special.jpg"
+      ]
+    },
+    {
+      "id": "DL04",
+      "category": "Deals",
+      "name": "Broast & Burger Mega Feast",
+      "description": "Quarter Crispy Chicken Broast + 1 Spicy Zinger Burger + 1 Classic Garlic Shawarma + 1 Loaded Fries + 2 Cold Drinks.",
+      "price": 1890,
+      "published": true,
+      "available": true,
+      "images": [
+        "/menu/deal-combo.jpg",
+        "/menu/broast-quarter.jpg",
+        "/menu/burger-spicy.jpg"
+      ],
+      "badge": "NEW COMBO"
+    }
+  ],
+  "loyaltyMilestones": [
+    {
+      "targetOrders": 10,
+      "title": "10-Order Free Shawarma / Same-Item / Mystery Unbox",
+      "reward": "Complete 10 orders of Shawarma, Burger, Broast, or Fries to get that SAME item FREE — or complete 10 mixed orders to unlock the Mystery Unbox (Free Shawarma or Surprise Treat)!",
+      "worthPKR": 520,
+      "codePrefix": "AT-REWARD10",
+      "icon": "🎁",
+      "badgeColor": "#e93822"
+    }
+  ],
+  "loyaltyMembers": [
+    {
+      "id": "ATC-8915-102",
+      "name": "Muhammad Ehsan Jalehdheri",
+      "username": "muhammadehsanjalehdheri",
+      "phone": "923008668915",
+      "address": "House 258 B Block Haider Garden",
+      "passwordHash": "8a916afa3ccf88e1e16b55edd6c66324e06ba4cdbbe3690625511ab30f67ae45",
+      "verifiedBy": "mobile",
+      "verifiedAt": "2026-11-09T13:03:43.370Z",
+      "favoriteCategory": "Shawarma",
+      "joinedAt": "2026-11-09T13:03:43.370Z",
+      "bonusStamps": 0,
+      "claimedTargets": [],
+      "rewardCodes": []
+    },
+    {
+      "id": "ATC-9655-101",
+      "name": "Muhammad Anwar",
+      "phone": "923007199655",
+      "favoriteCategory": "Chicken Broast",
+      "joinedAt": "2026-11-08T11:56:09.443Z",
+      "bonusStamps": 1,
+      "claimedTargets": [
+        1
+      ],
+      "rewardCodes": [
+        {
+          "target": 1,
+          "code": "AT-DIP1-9655",
+          "reward": "1 Free Welcome Stamp + Free Signature Garlic Mayo Dip Upgrade",
+          "claimedAt": "2026-11-08T11:56:09.443Z",
+          "redeemed": false
+        }
+      ]
+    }
+  ],
+  "pendingOtps": [],
+  "reviews": [
+    {
+      "id": "REV-01",
+      "customerName": "Ehsan Ali",
+      "phone": "923008668915",
+      "verifiedOrder": true,
+      "rating": 5,
+      "category": "Chicken Broast",
+      "favoriteDish": "Spicy Masala Injected Broast",
+      "comment": "Finally Jaranwala has proper pressure-fried Crispy Chicken Broast! The spicy masala injection goes right to the bone and the garlic dip is next level. Delivered hot to Housing Colony.",
+      "createdAt": "2026-11-02T16:20:00.000Z",
+      "approved": true,
+      "featured": true,
+      "adminReply": "Shukriya Ehsan bhai! Glad the Spicy Masala Broast hit the spot. See you on your next craving!"
+    },
+    {
+      "id": "REV-02",
+      "customerName": "Hamza Tariq",
+      "verifiedOrder": true,
+      "rating": 5,
+      "category": "Shawarma",
+      "favoriteDish": "Al-Tharid Special Shawarma",
+      "comment": "Best Arabic style shawarma in Jaranwala hands down. The garlic toum sauce feels authentic and the pita bread is super fresh, not soggy at all.",
+      "createdAt": "2026-11-04T19:15:00.000Z",
+      "approved": true,
+      "featured": true
+    },
+    {
+      "id": "REV-03",
+      "customerName": "Ayesha Malik",
+      "verifiedOrder": true,
+      "rating": 5,
+      "category": "Burger",
+      "favoriteDish": "Jalapeño Cheese Burger",
+      "comment": "Ordered The Tharid Feast and Jalapeño Cheese Zinger for a family get-together near College Road. Every single burger was super crunchy even after delivery!",
+      "createdAt": "2026-11-05T20:40:00.000Z",
+      "approved": true,
+      "featured": true,
+      "adminReply": "Thank you Ayesha! We pack our crispy fillets in vented boxes so they stay crunchy all the way to your door."
+    },
+    {
+      "id": "REV-04",
+      "customerName": "Usman Cheema",
+      "verifiedOrder": true,
+      "rating": 5,
+      "category": "Loaded Fries",
+      "favoriteDish": "BBQ Loaded Fries",
+      "comment": "The portion size of the Spicy Chicken and BBQ Loaded Fries is huge for the price. Plus the Loyalty Stamp Card is such a fun feature — already on 4 stamps!",
+      "createdAt": "2026-11-06T21:10:00.000Z",
+      "approved": true,
+      "featured": false
+    }
+  ],
+  "blogs": [
+    {
+      "id": "BLOG-01",
+      "slug": "crispy-chicken-broast-in-jaranwala",
+      "title": "Crispy Chicken Broast in Jaranwala: Why Al-Tharid’s Pressure-Fried Crunch Is a Game Changer",
+      "excerpt": "Searching for authentic, golden-crispy Chicken Broast in Jaranwala? Discover how Al-Tharid locks in juicy masala flavour down to the bone with our signature garlic toum dip.",
+      "coverImage": "/menu/broast-quarter.jpg",
+      "category": "Menu Spotlight",
+      "primaryKeyword": "crispy chicken broast in Jaranwala",
+      "secondaryKeywords": [
+        "best broast in Jaranwala",
+        "spicy masala injected broast",
+        "family broast bucket Jaranwala",
+        "halal fried chicken Jaranwala"
+      ],
+      "searchIntent": "Transactional",
+      "readTimeMinutes": 4,
+      "published": true,
+      "publishedAt": "2026-11-01",
+      "author": "Al-Tharid Culinary Team",
+      "content": [
+        "Until now, food lovers in Jaranwala often had to travel toward Faisalabad just to enjoy authentic, pressure-fried Crispy Chicken Broast that stays crunchy on the outside and tender to the bone. At Al-Tharid Jaranwala, we built our new Chicken Broast station from the ground up to bring that golden crunch right to your neighbourhood.",
+        "Every piece of Al-Tharid Chicken Broast starts with fresh, locally sourced halal chicken marinated for 12 hours in our house blend of warm Arabic spices and Punjabi aromatics. For spice lovers, our Spicy Masala Injected Broast delivers bold heat directly into the meat before it ever touches our seasoned flour dredge.",
+        "What truly sets our broast apart in Jaranwala is the double-dredge flaky breading and controlled pressure-frying. This seals natural juices inside while creating shatteringly crisp golden ridges that hold up even during home delivery across Jaranwala city.",
+        "Whether you are ordering a quick Quarter Broast (Rs 620) after college, sharing a Half Chicken Broast Platter (Rs 1,180) with friends, or hosting guests with our 8-piece Al-Tharid Family Broast Bucket (Rs 2,250), every order comes complete with golden fries, toasted buns, and our famous whipped garlic mayo dip."
+      ],
+      "faqs": [
+        {
+          "question": "What is the price of Chicken Broast at Al-Tharid Jaranwala?",
+          "answer": "Our Crispy Quarter Broast starts at Rs 620 (2 pieces with fries, bun, and garlic dip), Spicy Masala Injected Broast is Rs 680, Half Broast Platter (4 pieces) is Rs 1,180, and the 8-piece Family Bucket is Rs 2,250."
+        },
+        {
+          "question": "Does Al-Tharid deliver hot Chicken Broast across Jaranwala?",
+          "answer": "Yes! We deliver across Jaranwala city and up to 5 km into surrounding areas, with free home delivery on orders of Rs 500 or above."
+        }
+      ]
+    },
+    {
+      "id": "BLOG-02",
+      "slug": "best-fast-food-in-jaranwala-guide",
+      "title": "The Ultimate Guide to the Best Fast Food in Jaranwala (2026 Local Cravings Edition)",
+      "excerpt": "From sizzling Arabic Shawarmas and towering Zinger Burgers to Loaded Cheesy Fries and Crispy Broast — here is why Al-Tharid is becoming Jaranwala’s favourite food spot.",
+      "coverImage": "/menu/deal-combo.jpg",
+      "category": "Local Food Guide",
+      "primaryKeyword": "best fast food in Jaranwala",
+      "secondaryKeywords": [
+        "fast food restaurant in Jaranwala",
+        "Jaranwala food point",
+        "online food order Jaranwala",
+        "best restaurant in Jaranwala Punjab"
+      ],
+      "searchIntent": "Local Commercial",
+      "readTimeMinutes": 5,
+      "published": true,
+      "publishedAt": "2026-11-03",
+      "author": "Al-Tharid Jaranwala",
+      "content": [
+        "Jaranwala has always been a city that loves bold, generous hospitality and unforgettable food. Yet when it comes to modern fast food — where kitchen hygiene, consistent recipes, and fast online ordering meet bold local flavour — residents have long deserved a dedicated hometown brand.",
+        "That is the exact vision behind Al-Tharid in Jaranwala: 'Good Food for Happy People.' We curated our five core menu pillars around the cravings Jaranwala asks for most: Arabic & Spicy Shawarmas, Crispy Chicken Zinger Burgers, Golden Chicken Broast, Loaded Cheesy Fries, and Chilled Fresh Mint Lemonade.",
+        "Instead of generic frozen patties, our kitchen prepares fresh chicken thigh and breast fillets daily, pairs them with house-blended sauces (from smoky BBQ and jalapeño cheese to whipped Arabic garlic toum), and serves them at honest PKR prices.",
+        "Even better, ordering fast food in Jaranwala no longer requires long phone calls. With our live online cart, instant GPS delivery pin sharing, Cash on Delivery, and the Al-Tharid Craving Club loyalty card, every order brings you closer to free meals!"
+      ],
+      "faqs": [
+        {
+          "question": "Which fast food categories are available at Al-Tharid Jaranwala?",
+          "answer": "Al-Tharid serves 5 signature categories in Jaranwala: Shawarma, Crispy Chicken Burgers, Chicken Broast, Loaded Fries, and Cold Drinks, plus value Combo Deals."
+        },
+        {
+          "question": "How does the Al-Tharid Loyalty Card work for Jaranwala customers?",
+          "answer": "Simply sign up with your mobile number in our Craving Club section! You get 1 free welcome stamp immediately, and every order earns stamps toward free drinks (3 orders), free shawarma/fries (5 orders), free broast (8 orders), and a free combo meal (10 orders)."
+        }
+      ]
+    },
+    {
+      "id": "BLOG-03",
+      "slug": "why-al-tharid-zinger-burger-and-arabic-shawarma-lead-jaranwala",
+      "title": "Zinger Burger vs. Arabic Shawarma: Picking Your Perfect Evening Craving in Jaranwala",
+      "excerpt": "Torn between a towering Jalapeño Cheese Zinger Burger and a warm Classic Garlic Shawarma? Take a peek inside Al-Tharid’s sauces, marinades, and most-ordered items.",
+      "coverImage": "/menu/burger-special.jpg",
+      "category": "Behind The Kitchen",
+      "primaryKeyword": "best zinger burger in Jaranwala",
+      "secondaryKeywords": [
+        "arabic chicken shawarma Jaranwala",
+        "jalapeno cheese burger Jaranwala",
+        "garlic shawarma Jaranwala"
+      ],
+      "searchIntent": "Transactional",
+      "readTimeMinutes": 4,
+      "published": true,
+      "publishedAt": "2026-11-05",
+      "author": "Al-Tharid Culinary Team",
+      "content": [
+        "Walk into any lively evening gathering in Jaranwala and you will find two undefeated fast-food champions: the extra-crunchy Chicken Zinger Burger and the saucy, flame-kissed Chicken Shawarma.",
+        "For burger purists, our Crispy Classic (Rs 520) and Spicy Zinger (Rs 570) use whole chicken fillets coated in our spiced crunch batter, layered inside soft toasted buns with crisp lettuce and house sauce. Want maximum indulgence? The Jalapeño Cheese Burger (Rs 620) and Al-Tharid Special Burger (Rs 650) add melted cheese and smoky heat.",
+        "On the shawarma side, we moved away from dry, over-spiced cabbage wraps. Our Classic Garlic Shawarma (Rs 360) and Spicy Arabic Shawarma (Rs 390) focus on juicy marinated chicken strips, authentic garlic toum, and pillowy toasted flatbread.",
+        "Can’t decide between the two? Grab The Tharid Feast (Rs 2,890) or our new Broast & Burger Mega Feast (Rs 1,890) so nobody at the table has to compromise!"
+      ],
+      "faqs": [
+        {
+          "question": "What is the most popular burger and shawarma at Al-Tharid?",
+          "answer": "Our Spicy Zinger Burger (Rs 570), Jalapeño Cheese Burger (Rs 620), and Al-Tharid Special Shawarma (Rs 450) are the top customer favourites in Jaranwala."
+        }
+      ]
+    },
+    {
+      "id": "BLOG-04",
+      "slug": "late-night-food-delivery-and-family-deals-in-jaranwala",
+      "title": "Best Family Fast Food Deals & Free Home Delivery in Jaranwala — How to Save More",
+      "excerpt": "Feeding the whole crew or ordering dinner at home in Jaranwala? See how our Combo Deals, Free Delivery over Rs 500, and Loyalty Stamp Rewards stretch your PKR further.",
+      "coverImage": "/menu/fries-spicy.jpg",
+      "category": "Deals & Combos",
+      "primaryKeyword": "fast food home delivery Jaranwala",
+      "secondaryKeywords": [
+        "family food deals Jaranwala",
+        "loaded cheese fries Jaranwala",
+        "cheap fast food combos Jaranwala"
+      ],
+      "searchIntent": "Transactional",
+      "readTimeMinutes": 3,
+      "published": true,
+      "publishedAt": "2026-11-07",
+      "author": "Al-Tharid Jaranwala",
+      "content": [
+        "Ordering food for family or friends in Jaranwala shouldn't mean paying steep delivery charges or settling for small portions. At Al-Tharid, we designed our combo deals and delivery rules specifically for local households.",
+        "First, home delivery across Jaranwala city is completely FREE whenever your cart subtotal reaches Rs 500 or more (and just Rs 100 below that). That means even a singleCrispy Burger or Quarter Chicken Broast unlocks free doorstep delivery!",
+        "Second, our dedicated Deals section bundles our bestsellers at a built-in discount: the Solo Crunch Combo (Rs 990) gives one person a Burger, Loaded Fries, and Drink; the Shawarma Duo (Rs 1,390) is built for two; the new Broast & Burger Mega Feast (Rs 1,890) mixes Broast, Burger, Shawarma, Fries, and Drinks; and The Tharid Feast (Rs 2,890) feeds the whole family.",
+        "Don't forget to enter your same mobile number on every checkout — your orders automatically count toward your Al-Tharid Craving Club stamp card so you unlock free drinks, shawarmas, and broast platters!"
+      ],
+      "faqs": [
+        {
+          "question": "Is there free home delivery in Jaranwala?",
+          "answer": "Yes! Home delivery in Jaranwala is 100% free on all orders of Rs 500 and above."
+        }
+      ]
+    }
+  ],
+  "seoKeywords": [
+    {
+      "keyword": "best fast food in Jaranwala",
+      "urduTransliteration": "Jaranwala ka sab se acha fast food",
+      "intent": "Local Commercial",
+      "monthlySearchPotential": "High (1,200+ local searches/mo)",
+      "competition": "Low",
+      "targetPage": "/ & /blog/best-fast-food-in-jaranwala-guide",
+      "strategyNote": "Primary local category anchor for Google Maps & organic search in Jaranwala."
+    },
+    {
+      "keyword": "crispy chicken broast in Jaranwala",
+      "urduTransliteration": "Jaranwala crispy broast price & delivery",
+      "intent": "Transactional",
+      "monthlySearchPotential": "High (850+ local searches/mo)",
+      "competition": "Low",
+      "targetPage": "/#chicken-broast & /blog/crispy-chicken-broast-in-jaranwala",
+      "strategyNote": "High-margin signature product with very low local SEO competition in Jaranwala."
+    },
+    {
+      "keyword": "best zinger burger in Jaranwala",
+      "urduTransliteration": "crunchy zinger burger Jaranwala",
+      "intent": "Transactional",
+      "monthlySearchPotential": "High (950+ local searches/mo)",
+      "competition": "Medium",
+      "targetPage": "/#burgers & /blog/why-al-tharid-zinger-burger-and-arabic-shawarma-lead-jaranwala",
+      "strategyNote": "Captures students & evening family orders searching for Zinger combos."
+    },
+    {
+      "keyword": "arabic chicken shawarma Jaranwala",
+      "urduTransliteration": "garlic mayo shawarma Jaranwala",
+      "intent": "Transactional",
+      "monthlySearchPotential": "Medium-High (700+ local searches/mo)",
+      "competition": "Low",
+      "targetPage": "/#shawarma",
+      "strategyNote": "Targets evening street-food & quick-bite searchers looking for hygienic Arabic wraps."
+    },
+    {
+      "keyword": "fast food home delivery Jaranwala",
+      "urduTransliteration": "online food order Jaranwala cash on delivery",
+      "intent": "Transactional",
+      "monthlySearchPotential": "High (1,100+ local searches/mo)",
+      "competition": "Low",
+      "targetPage": "/cart & /blog/late-night-food-delivery-and-family-deals-in-jaranwala",
+      "strategyNote": "Converts direct website orders with free delivery over Rs 500 in Jaranwala."
+    },
+    {
+      "keyword": "loaded cheese fries Jaranwala",
+      "urduTransliteration": "cheesy chicken fries Jaranwala",
+      "intent": "Transactional",
+      "monthlySearchPotential": "Medium (450+ local searches/mo)",
+      "competition": "Low",
+      "targetPage": "/#loaded-fries",
+      "strategyNote": "Popular add-on keyword that boosts average order value (AOV)."
     }
   ]
 }

@@ -4,15 +4,109 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import type { Item } from "@/lib/store";
-import { deliveryCharge, formatPKR, googleMapsLocationUrl, type CheckoutInput, type CheckoutSettings, type Fulfillment, type LocationPin, type OrderReceipt } from "@/lib/orderTypes";
+import { deliveryCharge, formatPKR, googleMapsLocationUrl, statusLabels, type CheckoutInput, type CheckoutSettings, type Fulfillment, type LocationPin, type OrderReceipt } from "@/lib/orderTypes";
 import { getProductPhoto } from "@/lib/productPhotos";
 import { placeOrder } from "../order-actions";
+import { lookupOrJoinLoyalty, setupCustomerPasswordAfterOrder, type LoyaltyCardState } from "../actions";
 import { useCart } from "../CartProvider";
 
 const pendingKey = "al-tharid-checkout-request";
 const receiptKey = "al-tharid-last-receipt";
 
-function Receipt({ receipt, address }: { receipt: OrderReceipt; address: string }) {
+function Receipt({
+  receipt,
+  address,
+   fallbackPhone,
+  fallbackEmail,
+}: {
+  receipt: OrderReceipt;
+  address: string;
+  fallbackPhone: string;
+  fallbackEmail: string;
+}) {
+  const [password, setPassword] = useState("");
+  const [savingPassword, setSavingPassword] = useState(false);
+  const [pwdError, setPwdError] = useState("");
+  const [pwdSaved, setPwdSaved] = useState(false);
+  const [card, setCard] = useState<LoyaltyCardState | null>(null);
+  const [refreshingTrack, setRefreshingTrack] = useState(false);
+
+  const effectivePhone = receipt.phone || fallbackPhone;
+
+  useEffect(() => {
+    try {
+      const sessionRaw = localStorage.getItem("al-tharid-customer-session");
+      if (sessionRaw && effectivePhone) {
+        void lookupOrJoinLoyalty({ phone: effectivePhone, name: receipt.customerName }).then((res) => {
+          if (res.ok) {
+            setCard(res.card);
+            if (!receipt.needsPasswordSetup) setPwdSaved(true);
+          }
+        });
+      }
+    } catch {
+      /* Ignore storage errors */
+    }
+  }, [effectivePhone, receipt.customerName, receipt.needsPasswordSetup]);
+
+  async function handleSavePassword(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (savingPassword) return;
+    setSavingPassword(true);
+    setPwdError("");
+    try {
+      const res = await setupCustomerPasswordAfterOrder({
+        phone: effectivePhone,
+        name: receipt.customerName,
+        email: receipt.email || fallbackEmail,
+        password,
+      });
+      if (!res.ok) {
+        setPwdError(res.error);
+        return;
+      }
+      setCard(res.card);
+      setPwdSaved(true);
+      try {
+        localStorage.setItem("al-tharid-loyalty-phone", res.card.member.phone);
+        localStorage.setItem(
+          "al-tharid-customer-session",
+          JSON.stringify({
+            id: res.card.member.id,
+            name: res.card.member.name,
+            username: res.card.member.username,
+            phone: res.card.member.phone,
+            email: res.card.member.email,
+            address: res.card.member.address,
+          }),
+        );
+        window.dispatchEvent(new Event("al-tharid-auth-change"));
+      } catch {
+        /* Ignore */
+      }
+    } catch {
+      setPwdError("Could not save password right now. Please try again.");
+    } finally {
+      setSavingPassword(false);
+    }
+  }
+
+  async function refreshOrderStatus() {
+    if (!effectivePhone || refreshingTrack) return;
+    setRefreshingTrack(true);
+    try {
+      const res = await lookupOrJoinLoyalty({ phone: effectivePhone });
+      if (res.ok) setCard(res.card);
+    } finally {
+      setRefreshingTrack(false);
+    }
+  }
+
+  const latestTracked =
+    card?.recentOrders.find((o) => o.number === receipt.number) ??
+    card?.recentOrders[0];
+  const liveStatus = latestTracked?.status ?? receipt.status;
+
   return (
     <section className="order-receipt" aria-labelledby="receipt-heading" tabIndex={-1}>
       <div className="order-food-party" aria-hidden="true">
@@ -38,6 +132,151 @@ function Receipt({ receipt, address }: { receipt: OrderReceipt; address: string 
         {receipt.fulfillment === "delivery" && <div><span>Delivery</span><strong>{receipt.deliveryFee ? formatPKR(receipt.deliveryFee) : "Free"}</strong></div>}
         <div className="order-receipt__total"><span>Cash due</span><strong>{formatPKR(receipt.total)}</strong></div>
       </div>
+
+      {/* Cute Animated Soft Request to Setup Password & Login */}
+      {!pwdSaved ? (
+        <div className="cute-password-prompt">
+          <div className="cute-password-prompt__mascot" aria-hidden="true">
+            <span className="cute-mascot-face">🥰</span>
+            <span className="cute-mascot-sparkle cute-mascot-sparkle--1">✨</span>
+            <span className="cute-mascot-sparkle cute-mascot-sparkle--2">💖</span>
+          </div>
+          <div className="cute-password-prompt__body">
+            <span className="cute-password-prompt__badge">
+              ✨ YOUR ACCOUNT IS READY!
+            </span>
+            <h3>
+              One tiny, sweet request, {receipt.customerName.split(" ")[0]}! 🥺💖
+            </h3>
+            <p>
+              We’ve already saved your mobile number from this order and created your
+              personal Al-Tharid account automatically! To{" "}
+              <strong>track your live order right now</strong> and unlock your{" "}
+              <strong>10-Order Free Food Bonus Card</strong>, could you please kindly set a
+              quick password and log in to your account? Pretty please? 🥰✨
+            </p>
+            {pwdError && (
+              <p className="cute-password-prompt__error" role="alert">
+                {pwdError}
+              </p>
+            )}
+            <form onSubmit={(e) => void handleSavePassword(e)} className="cute-password-prompt__form">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Choose a simple password (4+ chars)…"
+                minLength={4}
+                maxLength={80}
+                required
+              />
+              <button type="submit" disabled={savingPassword}>
+                {savingPassword
+                  ? "Logging you in… 💖"
+                  : "Save Password & Track My Order 🥰"}
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : (
+        /* Live Order Tracker + Total Orders + Bonus Card Preview after setting password */
+        <div className="post-order-dashboard">
+          <div className="post-order-dashboard__header">
+            <div>
+              <span className="cute-password-prompt__badge">
+                🎉 LOGGED IN · LIVE ORDER &amp; BONUS TRACKER
+              </span>
+              <h3>
+                Yay, {card?.member.name ?? receipt.customerName}! Here is your live order &amp; reward card 💖
+              </h3>
+            </div>
+            <button
+              type="button"
+              className="post-order-dashboard__refresh"
+              onClick={() => void refreshOrderStatus()}
+              disabled={refreshingTrack}
+            >
+              {refreshingTrack ? "Refreshing…" : "↻ Refresh Live Status"}
+            </button>
+          </div>
+
+          <div className="post-order-stats">
+            <div>
+              <small>TOTAL ORDERS</small>
+              <strong>{card?.orderCount ?? 1}</strong>
+            </div>
+            <div>
+              <small>COMPLETED STAMPS</small>
+              <strong>{card?.totalStamps ?? 0} / 10</strong>
+            </div>
+            <div>
+              <small>IN KITCHEN NOW</small>
+              <strong>{card?.activeOrderCount ?? 1}</strong>
+            </div>
+          </div>
+
+          <div className="post-order-live-track">
+            <div className="post-order-live-track__top">
+              <strong>Live Order #{receipt.number}</strong>
+              <span className={`order-status-pill is-${liveStatus}`}>
+                {statusLabels[liveStatus]}
+              </span>
+            </div>
+            <div className="post-order-steps" aria-label="Order progress">
+              {[
+                { key: "new", label: "Placed" },
+                { key: "confirmed", label: "Confirmed" },
+                { key: "preparing", label: "Preparing" },
+                {
+                  key: receipt.fulfillment === "delivery" ? "out-for-delivery" : "ready",
+                  label: receipt.fulfillment === "delivery" ? "On the Way" : "Ready",
+                },
+                { key: "completed", label: "Completed (+1 ★)" },
+              ].map((s, idx) => {
+                const orderRank: Record<string, number> = {
+                  new: 0,
+                  confirmed: 1,
+                  preparing: 2,
+                  ready: 3,
+                  "out-for-delivery": 3,
+                  completed: 4,
+                };
+                const currentRank = orderRank[liveStatus] ?? 0;
+                const isDone = currentRank >= idx;
+                return (
+                  <div
+                    key={s.key}
+                    className={`post-order-step${isDone ? " is-done" : ""}`}
+                  >
+                    <span>{isDone ? "✓" : idx + 1}</span>
+                    <small>{s.label}</small>
+                  </div>
+                );
+              })}
+            </div>
+            <small className="post-order-live-note">
+              ✨ As soon as your order is marked <b>Completed</b>, you automatically earn{" "}
+              <b>+1 Stamp</b> on your 10-Order Bonus Card!
+            </small>
+          </div>
+
+          {card && (
+            <div className="post-order-bonus-preview">
+              <div>
+                <strong>
+                  {card.rewardEvaluation.icon} Your 10-Order Bonus Target:{" "}
+                  {card.rewardEvaluation.rewardTitle}
+                </strong>
+                <p>{card.rewardEvaluation.rewardDescription}</p>
+              </div>
+              <Link href="/account" className="primary-button">
+                Open My Account &amp; Order History ↗
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="order-receipt__actions"><Link href="/#shawarma">Back to menu ↗</Link><button type="button" onClick={() => window.print()}>Print receipt</button></div>
     </section>
   );
@@ -48,6 +287,7 @@ export default function CartContents({ items, config, pickupAddress }: { items: 
   const [fulfillment, setFulfillment] = useState<Fulfillment>(config.pickupEnabled ? "pickup" : "delivery");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
   const [location, setLocation] = useState<LocationPin | null>(null);
@@ -96,6 +336,21 @@ export default function CartContents({ items, config, pickupAddress }: { items: 
         const saved = JSON.parse(sessionStorage.getItem(receiptKey) ?? "null");
         if (saved?.receipt && Date.now() - saved.savedAt < 3600000 && localStorage.getItem("al-tharid-cart") === "[]") setReceipt(saved.receipt);
       } catch { /* The current checkout still works when session storage is unavailable. */ }
+      try {
+        const sessionRaw = localStorage.getItem("al-tharid-customer-session");
+        if (sessionRaw) {
+          const parsed = JSON.parse(sessionRaw) as {
+            name?: string;
+            phone?: string;
+            email?: string;
+            address?: string;
+          };
+          if (parsed.name) setName((prev) => prev || parsed.name || "");
+          if (parsed.phone) setPhone((prev) => prev || parsed.phone || "");
+          if (parsed.email) setEmail((prev) => prev || parsed.email || "");
+          if (parsed.address) setAddress((prev) => prev || parsed.address || "");
+        }
+      } catch { /* Ignore storage errors */ }
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
@@ -131,6 +386,7 @@ export default function CartContents({ items, config, pickupAddress }: { items: 
       lines: lines.map((line) => ({ ...line })),
       customerName: name,
       phone,
+      email,
       fulfillment,
       address,
       city: fulfillment === "delivery" ? config.deliveryCity : "",
@@ -178,7 +434,12 @@ export default function CartContents({ items, config, pickupAddress }: { items: 
         tabIndex={-1}
         className="checkout-success checkout-success--kitchen"
       >
-        <Receipt receipt={receipt} address={pickupAddress} />
+        <Receipt
+          receipt={receipt}
+          address={pickupAddress}
+          fallbackPhone={phone}
+          fallbackEmail={email}
+        />
 
         <aside className="kitchen-hustle kitchen-hustle--table">
           <span className="kitchen-hustle__label">
@@ -268,6 +529,7 @@ export default function CartContents({ items, config, pickupAddress }: { items: 
           <fieldset className="checkout-fields" disabled={submitting}><legend className="checkout-sr-only">Customer details</legend>
             <label>Your name<input name="customerName" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} minLength={2} maxLength={80} required placeholder="Your full name" /></label>
             <label>Mobile number<input name="phone" type="tel" inputMode="tel" autoComplete="tel" value={phone} onChange={(event) => setPhone(event.target.value)} maxLength={30} required placeholder="0300 1234567" /></label>
+            <label className="checkout-fields__wide">Email address <span>(optional — for account &amp; order updates)</span><input name="email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} maxLength={120} placeholder="you@example.com (optional)" /></label>
             {fulfillment === "delivery" && <><label className="checkout-fields__wide">Delivery address<textarea name="address" autoComplete="street-address" value={address} onChange={(event) => setAddress(event.target.value)} minLength={8} maxLength={300} rows={3} required placeholder="House / street, area, and nearby landmark" /></label><label className="checkout-fields__wide">Delivery hub<input name="city" value={config.deliveryCity} readOnly autoComplete="address-level2" /></label></>}
             <label className="checkout-fields__wide">Order notes <span>(optional)</span><textarea name="notes" value={notes} onChange={(event) => setNotes(event.target.value)} maxLength={300} rows={2} placeholder="Anything the team should know?" /></label>
           </fieldset>

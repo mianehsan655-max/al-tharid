@@ -4,7 +4,11 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: radial-gradient(circle at 75% 48%, #ffdb67 0, transparent 38%), var(--yellow);
+  background:
+    radial-gradient(circle at 75% 48%, #ffe27a 0%, transparent 42%),
+    radial-gradient(circle at 18% 20%, #ffd44d 0%, transparent 35%),
+    var(--yellow);
+  border-bottom: 2px solid #20191118;
 }
 
 .orbital-hero::before {
@@ -12,46 +16,142 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: .12;
-  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  opacity: .11;
+  background-image: radial-gradient(var(--ink) 1.1px, transparent 1.1px);
   background-size: 24px 24px;
 }
 
+.orbital-hero__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orbital-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.45;
+  animation: hero-float-slow 8s ease-in-out infinite alternate;
+}
+
+.orbital-hero__glow--one {
+  width: 340px;
+  height: 340px;
+  top: -80px;
+  right: 12%;
+  background: #fff3b0;
+}
+
+.orbital-hero__glow--two {
+  width: 260px;
+  height: 260px;
+  bottom: -60px;
+  left: 38%;
+  background: #ff9c3b;
+  animation-delay: -4s;
+}
+
 .orbital-hero__layout {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 48%) minmax(0, 52%);
-  min-height: 550px;
+  grid-template-columns: minmax(0, 50%) minmax(0, 50%);
+  grid-template-rows: auto auto;
+  min-height: 580px;
   align-items: center;
 }
 
-.orbital-hero__copy {
+.orbital-hero__header {
+  grid-column: 1;
+  grid-row: 1;
   position: relative;
   z-index: 5;
   min-width: 0;
-  padding: 45px 18px 35px 0;
+  padding: 44px 20px 0 0;
+  align-self: end;
+}
+
+.orbital-hero__body {
+  grid-column: 1;
+  grid-row: 2;
+  position: relative;
+  z-index: 5;
+  min-width: 0;
+  padding: 0 20px 40px 0;
+  align-self: start;
+}
+
+.orbital-hero__showcase {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  --orbit-radius: 92px;
+  --preview-offset: 138px;
+  --front-scale: 1.38;
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.orbital-hero__top-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 .orbital-hero__eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
+  gap: 9px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(32, 25, 17, 0.08);
   font-family: 'DM Sans', Arial, sans-serif;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: .23em;
+  letter-spacing: .2em;
   text-transform: uppercase;
+}
+
+.orbital-hero__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 0 rgba(233, 56, 34, 0.7);
+  animation: hero-pulse 2s infinite;
 }
 
 .orbital-hero__eyebrow span {
   color: var(--red);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 800;
 }
 
+.orbital-hero__Spotlight-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--cream);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(233, 56, 34, 0.28);
+  animation: orbit-fade-in .6s cubic-bezier(.16, 1, .3, 1) both;
+}
+
 .orbital-hero h1 {
-  margin: 28px 0 18px;
+  margin: 20px 0 14px;
   font-family: 'Barlow Condensed', Impact, 'Arial Narrow', sans-serif;
-  font-size: clamp(72px, 7vw, 112px);
+  font-size: clamp(68px, 6.8vw, 108px);
   font-weight: 800;
   line-height: .87;
   letter-spacing: -.025em;
@@ -65,17 +165,9 @@
   margin-bottom: -.11em;
 }
 
-.orbital-hero__line>span {
+.orbital-hero__line > span {
   display: block;
-  animation: orbit-text-in 1s cubic-bezier(.16, 1, .3, 1) both;
-}
-
-.orbital-hero__line:nth-child(2)>span {
-  animation-delay: 0s;
-}
-
-.orbital-hero__line:nth-child(3)>span {
-  animation-delay: 0s;
+  animation: orbit-text-in .85s cubic-bezier(.16, 1, .3, 1) both;
 }
 
 .orbital-hero__accent {
@@ -84,85 +176,182 @@
 }
 
 .orbital-hero__description {
-  max-width: 435px;
-  min-height: 52px;
-  margin-bottom: 22px;
+  max-width: 470px;
+  min-height: 48px;
+  margin: 0 0 22px;
   font-size: 15px;
-  line-height: 1.6;
-  animation: orbit-fade-in 1s ease both;
+  line-height: 1.58;
+  color: #2c2115;
+  animation: orbit-fade-in .85s ease both;
 }
 
 .orbital-hero__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 17px;
-  animation: orbit-fade-in 1s ease both;
+  gap: 12px;
+  animation: orbit-fade-in .9s ease both;
 }
 
-.orbital-hero__hours {
-  font-size: 11px;
+.orbital-hero__cta-main {
+  box-shadow: 0 10px 24px rgba(32, 25, 17, 0.24);
+}
+
+.orbital-hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  background: rgba(255, 249, 238, 0.78);
+  color: var(--ink);
+  font-size: 12px;
   font-weight: 800;
-  color: #634215;
+  transition: transform .22s ease, background .22s ease;
 }
 
-.orbital-hero__footnote {
+.orbital-hero__cta-secondary:hover {
+  transform: translateY(-3px);
+  background: var(--cream);
+}
+
+.orbital-hero__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(32, 25, 17, 0.15);
+}
+
+.orbital-hero__meta small {
   display: block;
-  margin-top: 34px;
-  font-family: 'Barlow Condensed', Impact, sans-serif;
-  font-size: 15px;
+  font-size: 9px;
   font-weight: 800;
-  letter-spacing: .17em;
+  letter-spacing: .14em;
+  color: #6b4c1b;
+  margin-bottom: 3px;
 }
 
-.orbital-hero__showcase {
-  --orbit-radius: 85px;
-  --preview-offset: 130px;
-  --front-scale: 1.4;
-  position: relative;
-  width: 100%;
-  height: 550px;
-  overflow: hidden;
+.orbital-hero__meta strong {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.orbital-hero__ring {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 390px;
+  height: 390px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px dashed rgba(32, 25, 17, 0.18);
+  animation: orbit-spin 36s linear infinite;
+  pointer-events: none;
+}
+
+.orbital-hero__float-badge {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 14px;
+  background: rgba(255, 249, 238, 0.94);
+  border: 1.5px solid rgba(32, 25, 17, 0.14);
+  box-shadow: 0 14px 30px rgba(32, 25, 17, 0.16);
+  backdrop-filter: blur(8px);
+  animation: hero-badge-pop .65s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.orbital-hero__float-badge--top {
+  top: 46px;
+  left: 22px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.orbital-hero__float-badge--top small {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.orbital-hero__float-badge--top strong {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.orbital-hero__float-badge--bottom {
+  bottom: 64px;
+  right: 22px;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.orbital-hero__float-badge--bottom span {
+  color: var(--red);
+  font-size: 15px;
 }
 
 .orbital-hero__food {
   position: absolute;
-  top: 54%;
+  top: 53%;
   left: 50%;
-  width: min(65%, 350px);
+  width: min(66%, 355px);
   aspect-ratio: 1;
-  filter: drop-shadow(12px 25px 16px #75411455);
+  filter: drop-shadow(12px 25px 18px #75411455);
   pointer-events: none;
   will-change: transform;
-  transition: left 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1), opacity .7s, filter .7s;
+  transition:
+    left .95s cubic-bezier(.22, 1, .36, 1),
+    transform .95s cubic-bezier(.22, 1, .36, 1),
+    opacity .65s ease,
+    filter .65s ease;
 }
 
 .orbital-hero__food img {
   object-fit: contain;
 }
 
+.orbital-hero__food.is-active img {
+  animation: hero-food-breathe 4.2s ease-in-out infinite;
+}
+
 .orbital-hero__food:not(.is-active) {
-  opacity: .58;
-  filter: blur(3px) drop-shadow(8px 13px 9px #75411433);
+  opacity: .52;
+  filter: blur(2.5px) drop-shadow(8px 13px 9px #75411433);
 }
 
 .orbital-hero__progress {
   position: absolute;
-  bottom: 27px;
+  bottom: 22px;
   left: 50%;
   z-index: 6;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   transform: translateX(-50%);
 }
 
-.orbital-hero__progress>span {
-  width: 24px;
-  height: 4px;
+.orbital-hero__progress > button {
+  width: 28px;
+  height: 6px;
+  padding: 0;
+  border: 0;
   overflow: hidden;
-  border-radius: 5px;
-  background: #41270f55;
+  border-radius: 999px;
+  background: #41270f44;
+  cursor: pointer;
 }
 
 .orbital-hero__progress i {
@@ -175,7 +364,7 @@
 }
 
 .orbital-hero__progress .is-active i {
-  animation: orbit-progress 4s linear forwards;
+  animation: orbit-progress 4.2s linear forwards;
 }
 
 @keyframes orbit-text-in {
@@ -183,7 +372,6 @@
     opacity: 0;
     transform: translateY(100%);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -195,7 +383,6 @@
     opacity: 0;
     transform: translateY(12px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -208,84 +395,200 @@
   }
 }
 
-@media (max-width: 1050px) {
-  .orbital-hero__layout {
-    min-height: 500px;
+@keyframes hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(233, 56, 34, 0.7);
   }
-
-  .orbital-hero h1 {
-    font-size: clamp(65px, 7vw, 82px);
+  70% {
+    box-shadow: 0 0 0 8px rgba(233, 56, 34, 0);
   }
-
-  .orbital-hero__showcase {
-    --orbit-radius: 72px;
-    --preview-offset: 105px;
-    height: 500px;
+  100% {
+    box-shadow: 0 0 0 0 rgba(233, 56, 34, 0);
   }
 }
 
-@media (max-width: 720px) {
+@keyframes orbit-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes hero-food-breathe {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.025);
+  }
+}
+
+@keyframes hero-badge-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-float-slow {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(20px, 18px);
+  }
+}
+
+@media (max-width: 1050px) {
+  .orbital-hero__layout {
+    min-height: 520px;
+  }
+
+  .orbital-hero h1 {
+    font-size: clamp(60px, 7vw, 82px);
+  }
+
+  .orbital-hero__showcase {
+    --orbit-radius: 74px;
+    --preview-offset: 108px;
+    height: 510px;
+  }
+}
+
+/* ==========================================================================
+   MOBILE HERO OPTIMISATION:
+   1. Centered Main Heading at the Top (.orbital-hero__header)
+   2. Food Image Scroller Directly Under Heading (.orbital-hero__showcase)
+   3. Description, CTA Buttons & Meta Content Below (.orbital-hero__body)
+   ========================================================================== */
+@media (max-width: 760px) {
   .orbital-hero__layout {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    padding-block: 18px 26px;
   }
 
-  .orbital-hero__copy {
+  /* 1. Top Centered Main Heading for the Food */
+  .orbital-hero__header {
+    order: 1;
     width: 100%;
-    padding: 35px 0 0;
+    padding: 4px 0 0;
+    text-align: center;
+  }
+
+  .orbital-hero__top-badges {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .orbital-hero__eyebrow {
+    padding: 5px 10px;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .orbital-hero__Spotlight-tag {
+    padding: 5px 10px;
+    font-size: 9px;
   }
 
   .orbital-hero h1 {
-    margin: 18px 0 12px;
-    font-size: clamp(64px, 13vw, 84px);
+    margin: 12px auto 4px;
+    font-size: clamp(54px, 14vw, 76px);
+    line-height: 0.88;
+    text-align: center;
   }
 
-  .orbital-hero__description {
-    min-height: 0;
-    margin-bottom: 15px;
-    font-size: 13px;
-  }
-
-  .orbital-hero__footnote {
-    display: none;
-  }
-
+  /* 2. Food Image Scroller Right Below the Centered Heading */
   .orbital-hero__showcase {
-    --orbit-radius: 57px;
-    --preview-offset: 75px;
-    --front-scale: 1.3;
-    height: 335px;
+    order: 2;
+    --orbit-radius: 54px;
+    --preview-offset: 78px;
+    --front-scale: 1.32;
+    width: 100%;
+    height: 325px;
+    margin: 2px 0 8px;
+  }
+
+  .orbital-hero__ring {
+    width: 245px;
+    height: 245px;
+  }
+
+  .orbital-hero__float-badge--top {
+    top: 10px;
+    left: 4px;
+    padding: 6px 11px;
+  }
+
+  .orbital-hero__float-badge--top strong {
+    font-size: 20px;
+  }
+
+  .orbital-hero__float-badge--bottom {
+    bottom: 38px;
+    right: 4px;
+    padding: 6px 11px;
+    font-size: 10px;
   }
 
   .orbital-hero__food {
-    width: min(65%, 265px);
+    top: 52%;
+    width: min(66%, 248px);
   }
 
   .orbital-hero__progress {
-    bottom: 10px;
+    bottom: 8px;
   }
 
-}
-
-@media (max-width: 380px) {
-  .orbital-hero h1 {
-    font-size: 62px;
+  /* 3. Content (Description, Buttons, Meta) Comes Below Image Scroller */
+  .orbital-hero__body {
+    order: 3;
+    width: 100%;
+    padding: 6px 0 0;
+    text-align: center;
   }
 
-  .orbital-hero__showcase {
-    --orbit-radius: 50px;
-    --preview-offset: 65px;
-    height: 310px;
+  .orbital-hero__description {
+    max-width: 420px;
+    min-height: 0;
+    margin: 0 auto 16px;
+    font-size: 13.5px;
+    line-height: 1.52;
+  }
+
+  .orbital-hero__actions {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .orbital-hero__cta-main,
+  .orbital-hero__cta-secondary {
+    justify-content: center;
+  }
+
+  .orbital-hero__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 14px;
+    text-align: center;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-
-  .orbital-hero__line>span,
+  .orbital-hero__line > span,
   .orbital-hero__description,
   .orbital-hero__actions,
-  .orbital-hero__progress .is-active i {
+  .orbital-hero__progress .is-active i,
+  .orbital-hero__ring,
+  .orbital-hero__food.is-active img,
+  .orbital-hero__float-badge,
+  .orbital-hero__pulse {
     animation: none;
   }
 

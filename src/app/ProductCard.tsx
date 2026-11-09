@@ -61,7 +61,9 @@ export default function ProductCard({ item }: { item: Item }) {
           />
         </button>
 
-        <span className="menu-card__tag">PREVIEW PHOTO</span>
+        <span className="menu-card__tag">
+          {item.badge ?? "FRESHLY PREPARED"}
+        </span>
 
         <span className="menu-card__view">
           View photos · {photos.length}

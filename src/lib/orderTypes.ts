@@ -20,6 +20,7 @@ export type CheckoutInput = {
   lines: { id: string; quantity: number }[];
   customerName: string;
   phone: string;
+  email?: string;
   fulfillment: Fulfillment;
   address: string;
   city: string;
@@ -74,7 +75,13 @@ export type Order = {
   history: { at: string; message: string }[];
 };
 
-export type OrderReceipt = Pick<Order, "number" | "createdAt" | "customerName" | "fulfillment" | "paymentMethod" | "paymentStatus" | "status" | "lines" | "subtotal" | "deliveryFee" | "total">;
+export type OrderReceipt = Pick<Order, "number" | "createdAt" | "customerName" | "fulfillment" | "paymentMethod" | "paymentStatus" | "status" | "lines" | "subtotal" | "deliveryFee" | "total"> & {
+  phone?: string;
+  email?: string;
+  memberId?: string;
+  accountCreated?: boolean;
+  needsPasswordSetup?: boolean;
+};
 export type CheckoutResult = { ok: true; receipt: OrderReceipt } | { ok: false; error: string };
 export type AdminResult = { ok: true; order?: Order; settings?: CheckoutSettings } | { ok: false; error: string };
 
